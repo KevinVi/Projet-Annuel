@@ -1,4 +1,5 @@
 
+ 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -14,6 +15,8 @@ import java.awt.event.MouseMotionListener;
 import java.awt.geom.Path2D;
 import java.util.LinkedList;
 import java.util.List;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -26,9 +29,11 @@ class Essai extends JPanel implements MouseListener, MouseMotionListener {
     private int mouseX;
     private int mouseY;
     private JFrame frame;
+    JButton bouton1;
  
     public Essai() {
-        
+        setSize(100,100);
+        bouton1 = new JButton("bouton1"); 
         addMouseListener(this);
         addMouseMotionListener(this);
     }
@@ -138,8 +143,8 @@ class Essai extends JPanel implements MouseListener, MouseMotionListener {
     public void mouseDragged(MouseEvent e) {
         //throw new UnsupportedOperationException("Not supported yet.");
     }
- /*   public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
+   /* public static void main(String[] args) {
+     /*   SwingUtilities.invokeLater(new Runnable() {
  
             @Override
             public void run() {
@@ -151,9 +156,9 @@ class Essai extends JPanel implements MouseListener, MouseMotionListener {
                 fr.add(e);
                 fr.setVisible(true);
             }
-        });
+        });*/
  
-    }*/
+    //}
 
  
    }

@@ -58,14 +58,13 @@ public class Menu extends JMenuBar{
         
             if ( event.getSource() == fermer)
             {
-                /*Main.test.dispose();
-                System.exit(0); */
+                Main.test.dispose();
+                System.exit(0); 
             }
 
             if ( event.getSource() == nouveau )
             {
-               /* Main.test.drawPanel.elements = new ArrayList();
-                Main.test.drawPanel.elements.add(new FillerElement(Color.white));*/
+               
             }
 
             if ( event.getSource() == save )
@@ -75,13 +74,9 @@ public class Menu extends JMenuBar{
 
             if ( event.getSource() == ouvrir )
             {
-               /* File fileName = Main.paint.getFileName();
-                Main.test.loadFile(fileName);
-                Main.test.loadElementsFromFile();
-                Main.test.closeFile();*/
+               
             }
-           /* Main.test.repaint();
-            setFocusable(false);*/
+         
         }
 
 		
