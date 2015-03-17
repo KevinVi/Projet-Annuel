@@ -1,7 +1,7 @@
+package essai;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -13,14 +13,12 @@ public class Menu extends JMenuBar{
     JMenuItem nouveau;
     JMenuItem ouvrir;
     JMenuItem save; 
-
     JMenu view;
-    
     JMenu options; 
-
     JMenu help;
     
-    Menu(){
+    public Menu(){
+    	
     	Menu.ItemHandler itemHandler = new Menu.ItemHandler();
 
         file   = new JMenu("File");
@@ -44,41 +42,33 @@ public class Menu extends JMenuBar{
         file.addSeparator();
         file.add(fermer);
 
-        
-
         add(file);
         add(view);
         add(options);
         add(help);
     }
+    
     private class ItemHandler implements ActionListener
     {
     	@Override
 		public void actionPerformed(ActionEvent event) {
         
-            if ( event.getSource() == fermer)
-            {
+            if ( event.getSource() == fermer){
                 Main.test.dispose();
                 System.exit(0); 
             }
 
-            if ( event.getSource() == nouveau )
-            {
+            if ( event.getSource() == nouveau ){
                
             }
 
-            if ( event.getSource() == save )
-            {
+            if ( event.getSource() == save ){
               //  Main.test.saveFile();
             }
 
-            if ( event.getSource() == ouvrir )
-            {
+            if ( event.getSource() == ouvrir ){
                
             }
-         
         }
-
-		
     }
 }

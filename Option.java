@@ -1,3 +1,5 @@
+package essai;
+
 /*
  * Classe des bouttons pour les menus
  */
@@ -53,7 +55,7 @@ public class Option extends JPanel implements ActionListener{
 		});
 	 } 
 	
-	private Essai ActionPerformedBtn1(ActionEvent evt){
+	private void ActionPerformedBtn1(ActionEvent evt){
 		//p.paint(getGraphics());
 	}
 	

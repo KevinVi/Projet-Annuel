@@ -1,5 +1,4 @@
-
- 
+package essai;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -15,11 +14,9 @@ import java.awt.event.MouseMotionListener;
 import java.awt.geom.Path2D;
 import java.util.LinkedList;
 import java.util.List;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
  
 class Essai extends JPanel implements MouseListener, MouseMotionListener {
  
@@ -46,7 +43,6 @@ class Essai extends JPanel implements MouseListener, MouseMotionListener {
         if (isEditing) {
             mouseX = event.getX();
             mouseY = event.getY();
-            
         }
         //System.out.println("Click: x= "+event.getX()+" y = "+event.getY());
         repaint();
@@ -57,6 +53,7 @@ class Essai extends JPanel implements MouseListener, MouseMotionListener {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
+    	
     	System.out.println("Position: x= "+e.getX()+" y = "+e.getY());
         if ((e.getModifiers() & InputEvent.BUTTON1_MASK) != 0) {
             // 1er click on demarre l'edition.
@@ -66,7 +63,8 @@ class Essai extends JPanel implements MouseListener, MouseMotionListener {
             pointList.add(new Point(e.getX(), e.getY()));
             mouseX = e.getX();
             mouseY = e.getY();
-        } else if ((e.getModifiers() & InputEvent.BUTTON3_MASK) != 0) {
+        } 
+        else if ((e.getModifiers() & InputEvent.BUTTON3_MASK) != 0) {
             Point p = new Point(e.getX(), e.getY());
             // Avoids very small polygons.
             if (!p.equals(pointList.get(pointList.size() - 1))) {
@@ -107,13 +105,13 @@ class Essai extends JPanel implements MouseListener, MouseMotionListener {
                     Point p1 = pointList.get(i);
                     Point p2 = pointList.get(i + 1);
                     g2d.drawLine(p1.x, p1.y, p2.x, p2.y);
-                    
                 }
                 g2d.setColor(Color.GREEN);
                 Point p1 = pointList.get(pointList.size() - 1);
                 g2d.drawLine(p1.x, p1.y, mouseX, mouseY);
             }
-        } finally {
+        } 
+        finally {
             g2d.dispose();
         }
     }
@@ -159,6 +157,4 @@ class Essai extends JPanel implements MouseListener, MouseMotionListener {
         });*/
  
     //}
-
- 
-   }
+}
