@@ -4,7 +4,10 @@ package essai;
  * Classe des bouttons pour les menus
  */
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -30,6 +33,8 @@ public class Option extends JPanel {
 		panneauBouton.add(Box.createVerticalStrut(20));
 		panneauBouton.add(new JSeparator(JSeparator.HORIZONTAL));
 		//panneauBouton.add(Box.createGlue());
-		add(panneauBouton,BorderLayout.CENTER );
+		this.add(panneauBouton,BorderLayout.CENTER );
+		this.setBackground(Color.decode("#2766A1"));
+		//setPreferredSize(new Dimension(180,0));
 	 } 
 }

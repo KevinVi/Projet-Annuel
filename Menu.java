@@ -1,10 +1,13 @@
 package essai;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 
 public class Menu extends JMenuBar{
@@ -16,6 +19,7 @@ public class Menu extends JMenuBar{
     JMenu view;
     JMenu options; 
     JMenu help;
+    String url = "http://devisme.fr/devis.php"; 
     
     public Menu(){
     	
@@ -42,10 +46,11 @@ public class Menu extends JMenuBar{
         file.addSeparator();
         file.add(fermer);
 
-        add(file);
-        add(view);
-        add(options);
-        add(help);
+        this.add(file);
+        this.add(view);
+        this.add(options);
+        this.add(help);
+        //this.setBackground(Color.decode("#E1E6FA"));
     }
     
     private class ItemHandler implements ActionListener
@@ -57,17 +62,28 @@ public class Menu extends JMenuBar{
                 Main.test.dispose();
                 System.exit(0); 
             }
-
+            
             if ( event.getSource() == nouveau ){
-               
+            	JOptionPane boite = new JOptionPane();
+            	int result = boite.showConfirmDialog(null, "Attention, vous allez quitter votre devis en cours", "Message", JOptionPane.OK_CANCEL_OPTION);
+    		    if(result == 0){
+    		    	Main.test.dispose();
+                	Base b = new Base();
+                	b.setLocationRelativeTo(null); // centrer la fenetre
+    	        }
+    		 
             }
-
+            
             if ( event.getSource() == save ){
               //  Main.test.saveFile();
             }
-
+            
             if ( event.getSource() == ouvrir ){
                
+            }
+            if (event.getSource() == help){
+            	
+            	
             }
         }
     }

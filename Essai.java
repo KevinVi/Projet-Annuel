@@ -29,7 +29,8 @@ class Essai extends JPanel implements MouseListener, MouseMotionListener {
     JButton bouton1;
  
     public Essai() {
-        setSize(100,100);
+        this.setSize(100,100);
+        this.setBackground(Color.decode("#E1E6FA"));
         bouton1 = new JButton("bouton1"); 
         addMouseListener(this);
         addMouseMotionListener(this);

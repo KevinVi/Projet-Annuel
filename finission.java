@@ -1,15 +1,19 @@
 package essai;
+import java.awt.Color;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 
 public class Finission extends JPanel {
 	
-	JButton bouton1;
+	JButton btnCréerDevis;
 	
 	public Finission(){
 		
-		bouton1 = new JButton("Créer Devis"); 
-		this.add(bouton1);
+		btnCréerDevis = new JButton("Créer Devis");
+		
+		this.add(btnCréerDevis);
+		this.setBackground(Color.decode("#2766A1"));
 	}
 }
