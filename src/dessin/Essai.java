@@ -1,4 +1,4 @@
-package essai;
+package dessin;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -17,8 +17,14 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
- 
-class Essai extends JPanel implements MouseListener, MouseMotionListener {
+/**
+* Estimate maker java application with GUI.
+* This class covers the designs of different forms.
+*
+* @author Mohammad Saman, Vivor Kevin
+*/ 
+
+public class Essai extends JPanel implements MouseListener, MouseMotionListener {
  
     private List<Shape> shapeList = new LinkedList<Shape>();
     private List<Point> pointList = new LinkedList<Point>();

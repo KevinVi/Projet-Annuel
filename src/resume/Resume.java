@@ -1,12 +1,16 @@
-package essai;
-
+package resume;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.TextArea;
 
 import javax.swing.JPanel;
-
+/**
+* Estimate maker java application with GUI.
+* This class handles the left side, which summarizes the materials used.
+*
+* @author Mohammad Saman, Vivor Kevin
+*/
 
 public class Resume extends JPanel {
 	

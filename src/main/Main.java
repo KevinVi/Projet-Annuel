@@ -1,5 +1,9 @@
-package essai;
+package main;
+
+import rassemblerJFrame.Base;
+
 /**
+* Estimate maker java application with GUI.
 *
 * @author Mohammad Saman, Vivor Kevin
 */

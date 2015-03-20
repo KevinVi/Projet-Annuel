@@ -1,4 +1,4 @@
-package essai;
+package rassemblerJFrame;
 import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -10,10 +10,24 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
+
+import resume.Resume;
+import main.Main;
+import menu.Menu;
+import menuDessin.Option;
+import dessin.Essai;
+import devis.Finission;
+/**
+* Estimate maker java application with GUI.
+* This class includes all panels in one JFrame.
+*
+* @author Mohammad Saman, Vivor Kevin
+*/
 
 public class Base extends JFrame {
 	public ObjectOutputStream output;

@@ -1,14 +1,18 @@
-package essai;
-
-import java.awt.Color;
+package menu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-
+import rassemblerJFrame.Base;
+import main.Main;
+/**
+* Estimate maker java application with GUI
+* This class includes the menu bar.
+*
+* @author Mohammad Saman, Vivor Kevin
+*/
 
 public class Menu extends JMenuBar{
 	JMenu file;
@@ -19,16 +23,17 @@ public class Menu extends JMenuBar{
     JMenu view;
     JMenu options; 
     JMenu help;
-    String url = "http://devisme.fr/devis.php"; 
+    JMenu info;
     
     public Menu(){
     	
     	Menu.ItemHandler itemHandler = new Menu.ItemHandler();
 
         file   = new JMenu("File");
-        help   = new JMenu("Help");
         view   = new JMenu("View");
         options=new JMenu("Options");
+        help   = new JMenu("Help");
+        info   = new JMenu("?");
 
         nouveau = new JMenuItem("Nouveau");
         ouvrir = new JMenuItem("Ouvrir");
@@ -50,19 +55,18 @@ public class Menu extends JMenuBar{
         this.add(view);
         this.add(options);
         this.add(help);
-        //this.setBackground(Color.decode("#E1E6FA"));
+        this.add(info);
     }
     
     private class ItemHandler implements ActionListener
     {
     	@Override
 		public void actionPerformed(ActionEvent event) {
-        
+ 
             if ( event.getSource() == fermer){
                 Main.test.dispose();
                 System.exit(0); 
             }
-            
             if ( event.getSource() == nouveau ){
             	JOptionPane boite = new JOptionPane();
             	int result = boite.showConfirmDialog(null, "Attention, vous allez quitter votre devis en cours", "Message", JOptionPane.OK_CANCEL_OPTION);
@@ -71,20 +75,17 @@ public class Menu extends JMenuBar{
                 	Base b = new Base();
                 	b.setLocationRelativeTo(null); // centrer la fenetre
     	        }
-    		 
             }
-            
             if ( event.getSource() == save ){
               //  Main.test.saveFile();
             }
-            
             if ( event.getSource() == ouvrir ){
                
             }
             if (event.getSource() == help){
-            	
-            	
+            		
             }
-        }
+    	}
     }
+    
 }

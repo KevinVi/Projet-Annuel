@@ -1,18 +1,18 @@
-package essai;
-
-/*
- * Classe des bouttons pour les menus
- */
+package menuDessin;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
-
+/**
+* Estimate maker java application with GUI.
+* This class handles the buttons on the right side, so choose the types of drawings.
+*
+* @author Mohammad Saman, Vivor Kevin
+*/
 
 public class Option extends JPanel {
 	
