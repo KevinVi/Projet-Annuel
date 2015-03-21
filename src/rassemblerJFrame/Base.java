@@ -1,5 +1,7 @@
 package rassemblerJFrame;
 import java.awt.BorderLayout;
+import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.BufferedWriter;
@@ -11,14 +13,18 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import resume.Resume;
 import main.Main;
 import menu.Menu;
+import menuDessin.Materiaux;
 import menuDessin.Option;
 import dessin.Essai;
 import devis.Finission;
@@ -30,11 +36,13 @@ import devis.Finission;
 */
 
 public class Base extends JFrame {
+	
 	public ObjectOutputStream output;
 	public ObjectInputStream input;
 	public Essai dessin;
 	protected Menu menuBar;
 	public Option menugauche;
+	public Materiaux materiauxgauche;
 	public Resume menudroit;
 	public Finission bas;
 
@@ -46,21 +54,28 @@ public class Base extends JFrame {
 		dessin = new Essai();
 		menuBar = new Menu();
 		menugauche = new Option();
+		materiauxgauche = new Materiaux();
 		menudroit = new Resume();
 		bas = new Finission();
 		add(new JScrollPane(dessin), BorderLayout.CENTER);
 		
-		
-		add(menugauche, BorderLayout.WEST);
+		JPanel gauche = new JPanel();
+		gauche.setLayout(new GridLayout(2,1));
+		gauche.add(menugauche);
+		gauche.add(materiauxgauche);
+		add(gauche, BorderLayout.WEST);
 		
 		add(new JScrollPane(menudroit), BorderLayout.EAST);
 		add(menuBar, BorderLayout.NORTH);
 		add(bas,BorderLayout.SOUTH);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Image img = kit.getImage("Info.png");
+		
+		Image img = kit.getImage("img/Desvis.png");
 		setIconImage(img);
 		setVisible(true);
 		
+		//this.add(new JLabel(new ImageIcon("img/fond.jpg")));	
+		//this.pack();
 		
 	}
 
@@ -118,4 +133,5 @@ public class Base extends JFrame {
 			System.exit(1);
 		}
 	}
+	
 }

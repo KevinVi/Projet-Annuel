@@ -1,10 +1,13 @@
 package menu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+
+import dessin.Essai;
 import rassemblerJFrame.Base;
 import main.Main;
 /**
@@ -72,6 +75,7 @@ public class Menu extends JMenuBar{
             	int result = boite.showConfirmDialog(null, "Attention, vous allez quitter votre devis en cours", "Message", JOptionPane.OK_CANCEL_OPTION);
     		    if(result == 0){
     		    	Main.test.dispose();
+    		    	//Main.test.dessin = new Essai();
                 	Base b = new Base();
                 	b.setLocationRelativeTo(null); // centrer la fenetre
     	        }
