@@ -7,6 +7,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import pluging.MainFrame;
 import dessin.Essai;
 import rassemblerJFrame.Base;
 import main.Main;
@@ -23,6 +24,7 @@ public class Menu extends JMenuBar{
     JMenuItem nouveau;
     JMenuItem ouvrir;
     JMenuItem save; 
+    JMenuItem plugin;
     JMenu view;
     JMenu options; 
     JMenu help;
@@ -42,15 +44,18 @@ public class Menu extends JMenuBar{
         ouvrir = new JMenuItem("Ouvrir");
         save = new JMenuItem("Sauvegarde");
         fermer = new JMenuItem("Fermer");
+        plugin = new JMenuItem("Gestion plugin");
 
         nouveau.addActionListener(itemHandler);
         ouvrir.addActionListener(itemHandler);
         save.addActionListener(itemHandler);
         fermer.addActionListener(itemHandler);
+        plugin.addActionListener(itemHandler);
 
         file.add(nouveau);
         file.add(ouvrir);
         file.add(save);
+        file.add(plugin);
         file.addSeparator();
         file.add(fermer);
 
@@ -88,6 +93,11 @@ public class Menu extends JMenuBar{
             }
             if (event.getSource() == help){
             		
+            }
+            if (event.getSource() == plugin){
+            	MainFrame p = new MainFrame();
+            	p.setLocationRelativeTo(null); // centrer la fenetre
+            	p.setVisible(true);
             }
     	}
     }
