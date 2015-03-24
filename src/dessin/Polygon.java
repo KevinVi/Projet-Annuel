@@ -13,8 +13,10 @@ import java.awt.geom.Point2D;
 
 import javax.swing.JPanel;
 
+import menuDessin.Option;
 
-public class Polygon_app extends JPanel implements MouseListener, MouseMotionListener  {
+
+public class Polygon extends JPanel implements MouseListener, MouseMotionListener  {
    
    /**
 	 * 
@@ -31,7 +33,7 @@ public class Polygon_app extends JPanel implements MouseListener, MouseMotionLis
       Graphics2D g3;
       
       private Point mouse = new Point();
-      Polygon_app() {
+      public Polygon() {
          setBackground(Color.WHITE);
          
          addMouseListener(this);

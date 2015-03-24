@@ -3,10 +3,16 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
+
+import dessin.Polygon;
 /**
 * Estimate maker java application with GUI.
 * This class handles the buttons on the right side, so choose the types of drawings.
@@ -20,7 +26,7 @@ JButton bouton1 ;
 JButton bouton2;
 String[] point = {"3","4","5","6","7","8","9","10"};
 static int sommet;
-Polygon_app poly;
+Polygon poly;
 public Option()
 	{
 		bouton1 = new JButton("polygon");
@@ -38,7 +44,6 @@ public Option()
 		//panneauBouton.add(Box.createGlue());
 		this.add(panneauBouton,BorderLayout.CENTER );
 		this.setBackground(Color.decode("#2766A1"));
-<<<<<<< HEAD
 		//setPreferredSize(new Dimension(180,0));
 	}
 @Override
@@ -64,9 +69,6 @@ public static int getSommet() {
 public static void setSommet(int s) {
 		sommet = s;
 }
-}
-=======
+
 		//this.setPreferredSize(new Dimension(180,0));
-	 } 
 }
->>>>>>> feature_plugin
