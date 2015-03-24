@@ -1,5 +1,6 @@
 package menuDessin;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -18,11 +19,12 @@ import javax.swing.JTabbedPane;
 		
     //Création de notre conteneur d'onglets
     onglet = new JTabbedPane();
-    onglet.add("Sol", new Panneau("sol"));
-    onglet.add("Mur", new Panneau("mur"));
+	    onglet.add("Sol", new Panneau("sol"));
+	    onglet.add("Mur", new Panneau("mur"));
     
     //On ajoute ensuite les onglets au Jpanel
     this.add(onglet);
+	//this.setBackground(Color.decode("#2766A1"));
     this.setPreferredSize(new Dimension(180,0));
   }
 	 

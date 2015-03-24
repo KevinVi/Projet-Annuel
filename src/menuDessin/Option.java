@@ -38,6 +38,7 @@ public Option()
 		//panneauBouton.add(Box.createGlue());
 		this.add(panneauBouton,BorderLayout.CENTER );
 		this.setBackground(Color.decode("#2766A1"));
+<<<<<<< HEAD
 		//setPreferredSize(new Dimension(180,0));
 	}
 @Override
@@ -64,3 +65,8 @@ public static void setSommet(int s) {
 		sommet = s;
 }
 }
+=======
+		//this.setPreferredSize(new Dimension(180,0));
+	 } 
+}
+>>>>>>> feature_plugin
