@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 
 public class Resume extends JPanel {
 	
-	private TextArea t;
+	private static TextArea t;
 	
 	public Resume(){
 		t = new TextArea("Lorem ipsum dolor sit amet");
@@ -25,4 +25,13 @@ public class Resume extends JPanel {
 		this.add (t);
 		this.setBackground(Color.decode("#2766A1"));
 	}
+
+	public static TextArea getT() {
+		return t;
+	}
+
+	public static void setT(TextArea t) {
+		Resume.t = t;
+	}
+	
 }

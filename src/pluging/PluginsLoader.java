@@ -91,7 +91,7 @@ public class PluginsLoader {
 			}
 			
 			URL u = f[index].toURL();
-			//On créer un nouveau URLClassLoader pour charger le jar qui se trouve ne dehors du CLASSPATH
+			//On créer un nouveau URLClassLoader pour charger le jar qui se trouve en dehors du CLASSPATH
 			loader = new URLClassLoader(new URL[] {u}); 
 			
 			//On charge le jar en mémoire
@@ -130,10 +130,8 @@ public class PluginsLoader {
 				}
 			}
 			
-		
 		}
 		
 	}
-	
 	
 }

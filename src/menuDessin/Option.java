@@ -35,6 +35,6 @@ public class Option extends JPanel {
 		//panneauBouton.add(Box.createGlue());
 		this.add(panneauBouton,BorderLayout.CENTER );
 		this.setBackground(Color.decode("#2766A1"));
-		//setPreferredSize(new Dimension(180,0));
+		//this.setPreferredSize(new Dimension(180,0));
 	 } 
 }

@@ -1,10 +1,17 @@
 package pluging;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
+
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -12,6 +19,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 
 /**
@@ -25,58 +33,45 @@ public class MainFrame extends JFrame implements ActionListener{
 	
 	private JMenuBar menuBar;
 	private JMenu fileMenu;
-	private JMenu stringPluginsMenu;
-	private JMenu intPluginsMenu;
 	
 	private JMenuItem exitMenuItem;
 	private JMenuItem loadMenuItem;
-	private JMenuItem runPluginsMenuItem;
-	private JTextArea stringTextArea;
-	private JTextArea intTextArea;
 	
+	private JTextArea TelechargerTextAreaInfo;
 	private PluginsLoader pluginsLoader;
-	private ArrayList files;
-	private ArrayList stringPlugins;
-	private ArrayList intPlugins;
+	
+	private JFileChooser f;
+	//private FileNameExtensionFilter filter;
+	private File dir;
+	private URL loadPath;
+	private URL[] classUrl;
+	private ClassLoader cl;
+	private Class loadedClass;
 	
 	public MainFrame(){
-		this.pluginsLoader = new PluginsLoader();
-		this.files = new ArrayList();
-		this.stringPlugins = new ArrayList();
-		this.intPlugins = new ArrayList();
-		//this.setBackground(Color.decode("#2766A1"));
-		
 		this.initialize();
 	}
 	
 	private void initialize(){
 		this.menuBar = new JMenuBar();
-		this.fileMenu = new JMenu();
-		this.stringPluginsMenu = new JMenu();
-		this.intPluginsMenu = new JMenu();
-		this.exitMenuItem = new JMenuItem();
-		this.loadMenuItem = new JMenuItem();
-		this.runPluginsMenuItem = new JMenuItem();
-		this.stringTextArea = new JTextArea();
-		this.intTextArea = new JTextArea();
+		this.TelechargerTextAreaInfo = new JTextArea();
 		
+		this.fileMenu = new JMenu();
+			this.exitMenuItem = new JMenuItem();
+			this.loadMenuItem = new JMenuItem();
 		//menuBar
 		this.menuBar.add(this.fileMenu);
-		this.menuBar.add(this.stringPluginsMenu);
-		this.menuBar.add(this.intPluginsMenu);
 		
 		//fileMenu
-		this.fileMenu.setText("Fichier");
+		this.fileMenu.setText("Menu");
 		this.fileMenu.add(this.loadMenuItem);
-		this.fileMenu.add(this.runPluginsMenuItem);
 		this.fileMenu.addSeparator();
 		this.fileMenu.add(this.exitMenuItem);
 		
-		//stringPluginsMenu
-		this.stringPluginsMenu.setText("String");
-		
-		//intPluginsMenu
-		this.intPluginsMenu.setText("int");
+		this.TelechargerTextAreaInfo.setBorder(new LineBorder(Color.black));
+		this.TelechargerTextAreaInfo.setEditable(false);
+		this.TelechargerTextAreaInfo.setBackground(Color.decode("#5E8BB5") );
+		this.TelechargerTextAreaInfo.setFont(new Font("Serif", Font.BOLD, 13));
 		
 		//exitMenuItem
 		this.exitMenuItem.setText("Fermer");
@@ -86,68 +81,48 @@ public class MainFrame extends JFrame implements ActionListener{
 		this.loadMenuItem.setText("Charger un plugins");
 		this.loadMenuItem.addActionListener(this);
 		
-		//runPluginsMenuItem
-		this.runPluginsMenuItem.setText("Lancer les plugins charger");
-		this.runPluginsMenuItem.addActionListener(this);
-		
-		//stringTextArea
-		this.stringTextArea.setBorder(new LineBorder(Color.black));
-		this.stringTextArea.setBackground(Color.decode("#E1E6FA"));
-		this.stringTextArea.setText("Zone pour les plugins sur les String");
-		
-		//intTextArea
-		this.intTextArea.setBorder(new LineBorder(Color.black));
-		this.intTextArea.setBackground(Color.decode("#E1E6FA"));
-		this.intTextArea.setText("Zone pour les plugins sur les int");
-		
-		//this
-		this.setSize(350,250);
+		//Configuration du JFrame
+		this.setSize(400,300);
 		this.setJMenuBar(this.menuBar);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setLayout(new GridLayout(2,1));
-		this.getContentPane().add(this.stringTextArea);
-		this.getContentPane().add(this.intTextArea);
+		this.setLayout(new GridLayout(1,1));
+		this.getContentPane().add(this.TelechargerTextAreaInfo);
 	}
 	
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(ActionEvent e) {
 		
-		if(arg0.getSource() == this.exitMenuItem ){
+		if(e.getSource() == this.exitMenuItem ){
 			this.setVisible(false);
 		}
-		else {
-			if( arg0.getSource() == this.loadMenuItem ){
-				JFileChooser f = new JFileChooser();
+		else if( e.getSource() == this.loadMenuItem ) {
+				this.f = new JFileChooser();
+				//FileNameExtensionFilter filter = new FileNameExtensionFilter("Fichiers .java", ".java");
+				//f.setFileFilter(filter);
 				
-				if(f.showOpenDialog(this) == JFileChooser.APPROVE_OPTION){
-					this.files.add(f.getSelectedFile().getAbsolutePath());
-				}
+				if(this.f.showOpenDialog(this) == JFileChooser.APPROVE_OPTION){
+					//this.files.add(f.getSelectedFile().getAbsolutePath());
+					
+					this.dir = new File(this.f.getSelectedFile().getAbsolutePath());
 				
-			}
-			else {
-				if( this.runPluginsMenuItem == arg0.getSource() ){
-					this.pluginsLoader.setFiles(this.convertArrayListToArrayString(this.files));
-					
-					
+					try {
+						this.loadPath = this.dir.toURI().toURL();
+						this.classUrl = new URL[]{this.loadPath};
+						
+						this.cl = new URLClassLoader(this.classUrl);
+						this.TelechargerTextAreaInfo.setText("la class télécharger est "+this.cl+". \n Vous pouvez lancer le chargement.");
+						
+						loadedClass = cl.loadClass("testclock"); // must be in package.class name format
+						this.TelechargerTextAreaInfo.setText("la class télécharger est "+this.loadedClass+". \n Le téléchargement a été lancé.");
+					} 
+					catch (MalformedURLException ex) {
+						ex.printStackTrace();
+					} 
+					catch (ClassNotFoundException e1) {
+						e1.printStackTrace();
+					} 
 				}
-				else {
-					
-				}
-			}
 		}
-		
 	}
-	
-	private String[] convertArrayListToArrayString(ArrayList list){
-		String[] tmp = new String[list.size()];
-		
-		for(int index = 0 ; index < tmp.length ; index ++ ){
-			tmp[index] = (String)list.get(index);
-		}
-		
-		return tmp;
-	}
-
-	
 	
 }
 
