@@ -26,7 +26,7 @@ import main.Main;
 import menu.Menu;
 import menuDessin.Materiaux;
 import menuDessin.Option;
-import dessin.Essai;
+import dessin.Polygon_app;
 import devis.Finission;
 /**
 * Estimate maker java application with GUI.
@@ -39,7 +39,7 @@ public class Base extends JFrame {
 	
 	public ObjectOutputStream output;
 	public ObjectInputStream input;
-	public Essai dessin;
+	public Polygon_app dessin;
 	protected Menu menuBar;
 	public Option menugauche;
 	public Materiaux materiauxgauche;
@@ -51,7 +51,7 @@ public class Base extends JFrame {
 		this.setTitle("Devis'Me");
 		setSize(1024, 768);
 		setLayout(new BorderLayout());
-		dessin = new Essai();
+		dessin = new Polygon_app();
 		menuBar = new Menu();
 		menugauche = new Option();
 		materiauxgauche = new Materiaux();
