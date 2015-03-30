@@ -1,14 +1,15 @@
 package Vue;
+import java.awt.Desktop;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.io.IOException;
+import java.net.URI;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-
 import Modèles.Base;
 import pluging.MainFrame;
 import main.Main;
@@ -20,12 +21,18 @@ import main.Main;
 */
 
 public class Menu extends JMenuBar{
+	
+	private static final long serialVersionUID = -437102206245752298L;
+	/**
+	 * 
+	 */
 	JMenu file;
     JMenuItem fermer;
     JMenuItem nouveau;
     JMenuItem ouvrir;
     JMenuItem save; 
     JMenuItem plugin;
+    JMenuItem site;
     JMenu view;
     JMenu options; 
     JMenu help;
@@ -48,6 +55,7 @@ public class Menu extends JMenuBar{
         fermer = new JMenuItem("Fermer");
         
         plugin = new JMenuItem("Gestion de plugins");
+        site = new JMenuItem("Manuel d'utilisation");
 
         nouveau.addActionListener(itemHandler);
         ouvrir.addActionListener(itemHandler);
@@ -55,7 +63,7 @@ public class Menu extends JMenuBar{
         fermer.addActionListener(itemHandler);
         
         plugin.addActionListener(itemHandler);
-        help.addActionListener(itemHandler);
+        site.addActionListener(itemHandler);
         
         file.add(nouveau);
         file.add(ouvrir);
@@ -64,6 +72,7 @@ public class Menu extends JMenuBar{
         file.add(fermer);
         
         options.add(plugin);
+        help.add(site);
 
         this.add(file);
         this.add(view);
@@ -82,8 +91,7 @@ public class Menu extends JMenuBar{
                 System.exit(0); 
             }
             if ( event.getSource() == nouveau ){
-            	JOptionPane boite = new JOptionPane();
-            	int result = boite.showConfirmDialog(null, "Attention, vous allez quitter votre devis en cours", "Message", JOptionPane.OK_CANCEL_OPTION);
+            	int result = JOptionPane.showConfirmDialog(null, "Attention, vous allez quitter votre devis en cours", "Message", JOptionPane.OK_CANCEL_OPTION);
     		    if(result == 0){
     		    	Main.test.dispose();
     		    	//Main.test.dessin = new Essai();
@@ -92,13 +100,19 @@ public class Menu extends JMenuBar{
     	        }
             }
             if ( event.getSource() == save ){
-              //  Main.test.saveFile();
+              
             }
             if ( event.getSource() == ouvrir ){
                
             }
-            if (event.getSource() == help){
-            	
+            if (event.getSource() == site){
+            	System.out.println("hello");
+            	URI uri = URI.create("http://devisme.fr/");
+            	try {
+					Desktop.getDesktop().browse(uri);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
             }
             if (event.getSource() == plugin){
             	MainFrame p = new MainFrame();
