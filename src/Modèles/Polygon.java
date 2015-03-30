@@ -1,4 +1,4 @@
-package dessin;
+package Modèles;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -11,9 +11,12 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.Point2D;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
-import menuDessin.Option;
+import Contrôleur.Option;
 
 
 public class Polygon extends JPanel implements MouseListener, MouseMotionListener  {
@@ -23,31 +26,23 @@ public class Polygon extends JPanel implements MouseListener, MouseMotionListene
 	 */
 	private static final long serialVersionUID = 1L;
 
-
-
 	int[] xcoord, ycoord;
-      int draggedPoint = -1;
-      int sommet = Option.getSommet();
+    int draggedPoint = -1;
+      int sommet =0;
       Point2D[] point;
+      JPanel coordonnee ;
       
       Graphics2D g3;
-      
       private Point mouse = new Point();
-      public Polygon() {
-         setBackground(Color.WHITE);
-         
-         addMouseListener(this);
-         addMouseMotionListener(this);
-         
-      }
       
-    /*  Polygon_app(int s) {
-          setBackground(Color.WHITE);
-          
-          addMouseListener(this);
-          addMouseMotionListener(this);
-          
-       }*/
+      //Constructeur
+      public Polygon() {
+    	  
+         this.setBackground(Color.WHITE);
+         //this.add(new JLabel(new ImageIcon("img/quadri.jpg")));
+         this.addMouseListener(this);
+         this.addMouseMotionListener(this);
+      }
 	
 	public void paintComponent(Graphics g) {
          super.paintComponent(g);
@@ -67,15 +62,20 @@ public class Polygon extends JPanel implements MouseListener, MouseMotionListene
          g2.drawPolygon(xcoord, ycoord, sommet);
          for (int i = 0; i < sommet; i++)
             g2.fillRect(xcoord[i] - 3, ycoord[i] - 3, 7, 7);
-         g2.drawString( (mouse.x) + ", " + (mouse.y) , 0, 10);
+         g2.drawString( (mouse.x) + ", " + (mouse.y) , 5, 13);
+         g2.setColor(Color.decode("#2766A1"));
+         g2.drawRect(0, 0, 60, 15);
          repaint();
       }
+	
       private int scaleX(double x) {
          return (int)(x * getWidth());
       }
+      
       private int scaleY(double y) {
          return (int)(y * getHeight());
       }
+      
       public void mousePressed(MouseEvent e) {
          draggedPoint = -1;
          for (int i = 0; i < sommet; i++) {
@@ -84,8 +84,8 @@ public class Polygon extends JPanel implements MouseListener, MouseMotionListene
                break;
             }
          }
-       
       }
+      
       public void mouseDragged(MouseEvent e) {
          if (draggedPoint < 0)
             return;
@@ -96,6 +96,11 @@ public class Polygon extends JPanel implements MouseListener, MouseMotionListene
          
          repaint();
       }
+      
+      public void setSommet(int s){
+    	  this.sommet =s;
+      }
+      
       public void mouseReleased(MouseEvent e) { }
       public void mouseMoved(MouseEvent e) {  mouse = e.getPoint();
       e.getComponent().repaint();}

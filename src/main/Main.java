@@ -1,6 +1,6 @@
 package main;
 
-import rassemblerJFrame.Base;
+import Modèles.Base;
 
 /**
 * Estimate maker java application with GUI.

@@ -1,4 +1,4 @@
-package resume;
+package Vue;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -30,8 +30,8 @@ public class Resume extends JPanel {
 		return t;
 	}
 
-	public static void setT(TextArea t) {
-		Resume.t = t;
+	public static void setT(TextArea text) {
+		Resume.t = text;
 	}
 	
 }

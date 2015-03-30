@@ -1,14 +1,16 @@
-package menu;
+package Vue;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+
+import Modèles.Base;
 import pluging.MainFrame;
-import rassemblerJFrame.Base;
 import main.Main;
 /**
 * Estimate maker java application with GUI

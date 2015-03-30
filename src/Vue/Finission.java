@@ -1,4 +1,4 @@
-package devis;
+package Vue;
 import java.awt.Color;
 
 import javax.swing.JButton;

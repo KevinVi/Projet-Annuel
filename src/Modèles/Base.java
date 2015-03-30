@@ -1,4 +1,4 @@
-package rassemblerJFrame;
+package Modèles;
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -21,13 +21,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import resume.Resume;
+import Contrôleur.Option;
+import Vue.Finission;
+import Vue.Materiaux;
+import Vue.Menu;
+import Vue.Resume;
 import main.Main;
-import menu.Menu;
-import menuDessin.Materiaux;
-import menuDessin.Option;
-import dessin.Polygon;
-import devis.Finission;
 /**
 * Estimate maker java application with GUI.
 * This class includes all panels in one JFrame.
@@ -39,11 +38,11 @@ public class Base extends JFrame {
 	
 	public ObjectOutputStream output;
 	public ObjectInputStream input;
-	public Polygon dessin;
+	public Onglet dessin;
 	protected Menu menuBar;
 	public Option menugauche;
 	public Materiaux materiauxgauche;
-	public Resume menudroit;
+	public Resume menudroit; //setTexte sur ça
 	public Finission bas;
 
 	public Base() {
@@ -51,13 +50,13 @@ public class Base extends JFrame {
 		this.setTitle("Devis'Me");
 		setSize(1024, 768);
 		setLayout(new BorderLayout());
-		dessin = new Polygon();
+		dessin = new Onglet();
 		menuBar = new Menu();
-		menugauche = new Option();
-		materiauxgauche = new Materiaux();
+		menugauche = new Option(dessin);
+		materiauxgauche = new Materiaux(menudroit);
 		menudroit = new Resume();
 		bas = new Finission();
-		add(new JScrollPane(dessin), BorderLayout.CENTER);
+		add(dessin, BorderLayout.CENTER);
 		
 		JPanel gauche = new JPanel();
 		gauche.setLayout(new GridLayout(2,1));

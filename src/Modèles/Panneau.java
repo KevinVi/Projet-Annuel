@@ -1,4 +1,4 @@
-package menuDessin;
+package Modèles;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+
+import Contrôleur.ResumePanneau;
 
 /**
 * Estimate maker java application with GUI.
