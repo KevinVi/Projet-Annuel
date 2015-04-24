@@ -40,6 +40,7 @@ public class Base extends JFrame {
 	public ObjectInputStream input;
 	public Onglet dessin;
 	protected Menu menuBar;
+	public Polygon poly;
 	public Option menugauche;
 	public Materiaux materiauxgauche;
 	public Resume menudroit; //setTexte sur ça
@@ -51,10 +52,11 @@ public class Base extends JFrame {
 		setSize(1024, 768);
 		setLayout(new BorderLayout());
 		dessin = new Onglet();
+		poly = new Polygon();
 		menuBar = new Menu();
 		menugauche = new Option(dessin);
 		materiauxgauche = new Materiaux(menudroit);
-		menudroit = new Resume();
+		menudroit = new Resume(poly);
 		bas = new Finission();
 		add(dessin, BorderLayout.CENTER);
 		

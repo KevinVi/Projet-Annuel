@@ -5,6 +5,9 @@ import java.awt.GridLayout;
 import java.awt.TextArea;
 
 import javax.swing.JPanel;
+
+import Modèles.Onglet;
+import Modèles.Polygon;
 /**
 * Estimate maker java application with GUI.
 * This class handles the left side, which summarizes the materials used.
@@ -15,14 +18,18 @@ import javax.swing.JPanel;
 public class Resume extends JPanel {
 	
 	private static TextArea t;
+	private Polygon dessin;
 	
-	public Resume(){
-		t = new TextArea("Lorem ipsum dolor sit amet");
+	public Resume(Polygon poly){
+		this.dessin=poly;
+		double area = this.dessin.area();
+		t = new TextArea(""+area);
 		t.setEditable(false);
 		
 		this.setPreferredSize(new Dimension(180,0));
 		this.setLayout(new GridLayout(2, 1));
 		this.add (t);
+		//this.setText(this.dessin.area());
 		this.setBackground(Color.decode("#2766A1"));
 	}
 
@@ -31,7 +38,7 @@ public class Resume extends JPanel {
 	}
 
 	public static void setT(TextArea text) {
-		Resume.t = text;
+		t = text;
 	}
 	
 }
