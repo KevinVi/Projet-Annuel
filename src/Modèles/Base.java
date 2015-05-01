@@ -7,7 +7,9 @@ import java.awt.Toolkit;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -21,7 +23,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import Contrôleur.Option;
 import Vue.Finission;
@@ -38,7 +43,7 @@ import main.Main;
 
 public class Base extends JFrame {
 	
-	public ObjectOutputStream output;
+	public static ObjectOutputStream output;
 	public ObjectInputStream input;
 	public Onglet dessin;
 	protected Menu menuBar;
@@ -47,6 +52,8 @@ public class Base extends JFrame {
 	public Materiaux materiauxgauche;
 	public Resume menudroit; //setTexte sur ça
 	public Finission bas;
+	static int tabX[]=new int[10];
+	static int tabY[] = new int [10];
 
 	public Base() {
 		Toolkit kit = Toolkit.getDefaultToolkit();
@@ -100,42 +107,75 @@ public class Base extends JFrame {
 		}
 	}
 
-	public void openFile(File fileName) {
+	public static void openFile() {
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		fileChooser.setCurrentDirectory(new File(""));
+		fileChooser.showOpenDialog(Main.test);
+		File fileName = fileChooser.getSelectedFile();
+		int j=0;
+		
 		try {
-			output = new ObjectOutputStream(new FileOutputStream(fileName));
-		} catch (IOException ioException) {
-			System.err.println("Error loading file: " + fileName);
-			return;
+			FileReader reader = new FileReader(fileName);
+			JSONParser parser = new JSONParser();
+			JSONObject obj = (JSONObject) parser.parse(reader);
+			JSONArray onglet= (JSONArray) obj.get("Nom_onglet");
+			int x;
+			
+			for (int i=0;i<onglet.size();i++){
+				//System.out.println("coordonnée"+onglet.get(i));
+				if(i<onglet.size()/2){
+					System.out.println("coordonnée x "+i+" : "+onglet.get(i));
+					tabX[i]=Integer.parseUnsignedInt((String) onglet.get(i)) ;
+					
+				}else{
+					System.out.println("coordonnée y"+onglet.get(i));
+					tabY[j]=Integer.parseUnsignedInt((String) onglet.get(i)) ;
+					j++;
+				}
+			}
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		Polygon.xcoord=tabX;
+		Polygon.ycoord=tabY;
+		Polygon.sommet=j;
 	}
 
-	public static void saveFile() {
+public static void saveFile() {
 		
 		JSONObject obj = new JSONObject();
 		obj=Polygon.get_json();
 		 try {
 			
-			 	 
+			JFileChooser chooseDirec = new JFileChooser();
+			chooseDirec.setFileSelectionMode(JFileChooser.FILES_ONLY);
+			chooseDirec.showSaveDialog(Main.test);
+			File file = chooseDirec.getSelectedFile();
 			
-			 	            FileWriter jsonFileWriter = new FileWriter("C:\\Users\\kevin\\Desktop\\file1.txt");
-			
-			 	            jsonFileWriter.write(obj.toJSONString());
-			
-			 	            jsonFileWriter.flush();
-			 
-			 	            jsonFileWriter.close();
-			
-			 	 
-			
-			 	            System.out.print(obj);
-			
-			 	 
-			
-			 	        } catch (IOException e) {
-			 
-			 	            e.printStackTrace();
-			
-			 	        }
+			FileWriter jsonFileWriter = new FileWriter(file+".json");
+					
+			jsonFileWriter.write(obj.toJSONString());
+
+			jsonFileWriter.flush();
+
+			jsonFileWriter.close();
+
+			System.out.print(obj);
+
+		} catch (IOException e) {
+
+			e.printStackTrace();
+
+		}
 		/*try {
 			JFileChooser chooseDirec = new JFileChooser();
 			chooseDirec.setFileSelectionMode(JFileChooser.FILES_ONLY);

@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import Vue.Menu;
 import Vue.Resume;
 
 
@@ -58,6 +59,7 @@ public class Polygon extends JPanel implements MouseListener, MouseMotionListene
 	public void paintComponent(Graphics g) {
          super.paintComponent(g);
          Graphics2D g2 = (Graphics2D)g;
+         //Option;
          g.drawImage(img, 0, 0, null);
          if (xcoord == null) {
             xcoord = new int[] { scaleX(0.1), scaleX(0.3), scaleX(0.4),scaleX(0.75),scaleX(0.9),
@@ -121,6 +123,7 @@ public class Polygon extends JPanel implements MouseListener, MouseMotionListene
                break;
             }
          }
+         Menu.getSave().setEnabled(true);
       }
       
       public void mouseDragged(MouseEvent e) {
@@ -237,18 +240,23 @@ public class Polygon extends JPanel implements MouseListener, MouseMotionListene
 	}
 	public static JSONObject get_json(){
 		int i=0;
-		JSONObject obj = new JSONObject();
+		JSONObject objx = new JSONObject();
+		JSONObject objy = new JSONObject();
 		JSONObject obj2 = new JSONObject();
-		JSONArray jsonArray1 = new JSONArray();
-		JSONArray jsonArray2 = new JSONArray();
+		JSONArray ArrayCoorX = new JSONArray();
+		JSONArray ArrayCoorY = new JSONArray();
+		JSONArray ArrayOnglet = new JSONArray();
 		//for (i=0;i<sommet;i++){ pour chaque onglet
 			
 			for (i=0;i<sommet;i++){
-				jsonArray2.add(""+i);
-				jsonArray2.add(""+xcoord[i]);
-				jsonArray2.add(""+ycoord[i]);
+				ArrayOnglet.add(""+xcoord[i]);
+				
 			}
-			obj2.put("Nom_onglet",jsonArray2);
+			for (i=0;i<sommet;i++){
+				ArrayOnglet.add(""+ycoord[i]);
+				
+			}
+			obj2.put("Nom_onglet",ArrayOnglet);
 			//obj.put("Sommet "+i,"Coordonné X :"+xcoord[i] +", Coordonnée Y : "+ycoord[i]);
 		//}
 		return obj2;

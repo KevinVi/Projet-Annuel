@@ -105,10 +105,10 @@ public class Menu extends JMenuBar{
     	        }
             }
             if ( event.getSource() == save ){
-              
+            	Base.saveFile();
             }
             if ( event.getSource() == ouvrir ){
-               
+               Base.openFile();
             }
             if (event.getSource() == site){
             	System.out.println("hello");
