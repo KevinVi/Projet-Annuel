@@ -4,10 +4,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Label;
 import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.TextArea;
+import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -38,13 +40,15 @@ public class Polygon extends JPanel implements MouseListener, MouseMotionListene
       JPanel coordonnee ;
       private static TextArea t;
       Graphics2D g3;
+      Image img;
       private Point mouse = new Point();
       //getSelectedIndex() recupération de l'onglet en cour
       //Constructeur
       public Polygon() {
     	  
-         this.setBackground(Color.WHITE);
-         //this.add(new JLabel(new ImageIcon("img/quadri.jpg")));
+         //this.setBackground(Color.BLUE);
+         //this.add(new JLabel(new ImageIcon()));
+         img = Toolkit.getDefaultToolkit().createImage("img/quadri.jpg");
          this.addMouseListener(this);
          this.addMouseMotionListener(this);
          
@@ -53,6 +57,7 @@ public class Polygon extends JPanel implements MouseListener, MouseMotionListene
 	public void paintComponent(Graphics g) {
          super.paintComponent(g);
          Graphics2D g2 = (Graphics2D)g;
+         g.drawImage(img, 0, 0, null);
          if (xcoord == null) {
             xcoord = new int[] { scaleX(0.1), scaleX(0.3), scaleX(0.4),scaleX(0.75),scaleX(0.9),
                                scaleX(0.75), scaleX(0.6), scaleX(0.3) ,scaleX(0.2),scaleX(0.1)};
