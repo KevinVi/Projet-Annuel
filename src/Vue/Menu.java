@@ -30,7 +30,7 @@ public class Menu extends JMenuBar{
     JMenuItem fermer;
     JMenuItem nouveau;
     JMenuItem ouvrir;
-    JMenuItem save; 
+    static JMenuItem save; 
     JMenuItem plugin;
     JMenuItem site;
     JMenu view;
@@ -52,6 +52,7 @@ public class Menu extends JMenuBar{
         nouveau = new JMenuItem("Nouveau");
         ouvrir = new JMenuItem("Ouvrir");
         save = new JMenuItem("Sauvegarde");
+        	save.setEnabled(false);
         fermer = new JMenuItem("Fermer");
         
         plugin = new JMenuItem("Gestion de plugins");
@@ -81,7 +82,11 @@ public class Menu extends JMenuBar{
         this.add(info);
     }
     
-    private class ItemHandler implements ActionListener
+    public static JMenuItem getSave() {
+		return save;
+	}
+
+	private class ItemHandler implements ActionListener
     {
     	@Override
 		public void actionPerformed(ActionEvent event) {

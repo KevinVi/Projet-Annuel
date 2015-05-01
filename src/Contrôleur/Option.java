@@ -15,6 +15,7 @@ import javax.swing.JTabbedPane;
 
 import Modèles.Onglet;
 import Modèles.Polygon;
+import Vue.Menu;
 /**
 * Estimate maker java application with GUI.
 * This class handles the buttons on the right side, so choose the types of drawings.
@@ -71,7 +72,7 @@ public class Option extends JPanel implements ActionListener {
 		if(e.getSource()== btnDessiner){
 			   
 			this.dessin.poly.setSommet(Integer.parseInt((String) JOptionPane.showInputDialog(null, "Combien de sommets posséde votre pièce ?", "Créer un polygone", JOptionPane.QUESTION_MESSAGE, null, point,point[0])));    
-
+			Menu.getSave().setEnabled(true);;
 		}
 		else if(e.getSource()==btnEffacer){	 
 			
