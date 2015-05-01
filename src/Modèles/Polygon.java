@@ -1,7 +1,6 @@
 package Modèles;
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -15,13 +14,12 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.Point2D;
 
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import Vue.Resume;
-import Contrôleur.Option;
 
 
 public class Polygon extends JPanel implements MouseListener, MouseMotionListener  {
@@ -31,23 +29,26 @@ public class Polygon extends JPanel implements MouseListener, MouseMotionListene
 	 */
 	private static final long serialVersionUID = 1L;
 
-	int[] xcoord, ycoord;
+	static int[] xcoord;
+
+	static int[] ycoord;
 	String[] color;
 	private Label label;
     int draggedPoint = -1;
-      int sommet =0;
+      static int sommet =0;
       Point2D[] point;
       JPanel coordonnee ;
       private static TextArea t;
       Graphics2D g3;
       Image img;
       private Point mouse = new Point();
+      java.text.DecimalFormat df = new java.text.DecimalFormat("0.##");
       //getSelectedIndex() recupération de l'onglet en cour
       //Constructeur
       public Polygon() {
     	  
-         //this.setBackground(Color.BLUE);
-         //this.add(new JLabel(new ImageIcon()));
+         this.setBackground(Color.WHITE);
+         //this.add(new JLabel(new ImageIcon("img/quadri.jpg")));
          img = Toolkit.getDefaultToolkit().createImage("img/quadri.jpg");
          this.addMouseListener(this);
          this.addMouseMotionListener(this);
@@ -85,13 +86,23 @@ public class Polygon extends JPanel implements MouseListener, MouseMotionListene
          //System.out.println(this.area());
          
          //affichage des longueur segment
-         java.text.DecimalFormat df = new java.text.DecimalFormat("0.##");
-         moitierX();
-         moitierY();
-         g2.setColor(Color.decode("#E90101"));
          
+         
+         g2.setColor(Color.decode("#E90101"));
+         int i=0;
+        // g2.drawString( ""+df.format(longueurlast(2)) ,moitierXlast(2), moitierYlast(2));
+        while(i<sommet-1){
+        	 g2.drawString( ""+df.format(longueur(i)) ,moitierX(i), moitierY(i));
+        	 i++;
+        	 if(i==sommet-1){
+        		 g2.drawString( ""+df.format(longueurlast(i)) ,moitierXlast(i), moitierYlast(i));
+        	 }
+        	 
+        	 
+        }
+        //System.out.println(i);
+        //g2.drawString( ""+df.format(longueurlast(i)) ,moitierXlast(i), moitierYlast(i));
         
-         g2.drawString( ""+df.format(longueur()) ,moitierX(), moitierY());
       }
 	
       private int scaleX(double x) {
@@ -128,7 +139,7 @@ public class Polygon extends JPanel implements MouseListener, MouseMotionListene
        t = new TextArea(""+area);
        Resume.setT(t);
        
-       longueur();
+       
        
        
       }
@@ -156,38 +167,91 @@ public class Polygon extends JPanel implements MouseListener, MouseMotionListene
 		area /= 2.0;
 		return (Math.abs(area));
 		}
-	public double longueur(){
+	public double longueur(int sommet){
 	    double res,lx,ly = 0.0;
-	    lx = xcoord[1] - xcoord[2];
-	    ly = ycoord[1] - ycoord[2];
+	    lx = xcoord[sommet] - xcoord[sommet+1];
+	    ly = ycoord[sommet] - ycoord[sommet+1];
 	    res= Math.sqrt((lx*lx)+(ly*ly));
 	    return res;
 	
 	}
-	public int moitierX(){
+	public int moitierX(int sommet){
 		int lx= 0;
-	    lx = xcoord[1] - xcoord[2];
+	    lx = xcoord[sommet] - xcoord[sommet+1];
 	    lx = Math.abs(lx);
 	    lx = lx / 2;
-	    if (xcoord[1]<xcoord[2]){
-       	 lx += xcoord[1];
+	    if (xcoord[sommet]<xcoord[sommet+1]){
+       	 lx += xcoord[sommet];
         }else{
-       	 lx += xcoord[2];
+       	 lx += xcoord[sommet+1];
         }
-	    
+	   // System.out.println("voici lx:"+lx);
 	    return lx;
 	}
-	public int moitierY(){
+	public int moitierY(int sommet){
 		int ly= 0;
-		ly = ycoord[1] - ycoord[2];
+		ly = ycoord[sommet] - ycoord[sommet+1];
 		ly = Math.abs(ly);
 	    ly = ly / 2;
-	    if (ycoord[1]<ycoord[2]){
-       	 ly += ycoord[1];
+	    if (ycoord[sommet]<ycoord[sommet+1]){
+       	 ly += ycoord[sommet];
         }else{
-       	 ly += ycoord[2];
+       	 ly += ycoord[sommet+1];
         }
+	   // System.out.println("voici ly:"+ly);
 	    return ly;
+	}
+	public double longueurlast(int sommet){
+	    double res,lx,ly = 0.0;
+	    lx = xcoord[sommet] - xcoord[0];
+	    ly = ycoord[sommet] - ycoord[0];
+	    res= Math.sqrt((lx*lx)+(ly*ly));
+	    return res;
+	
+	}
+	public int moitierXlast(int sommet){
+		int lx= 0;
+	    lx = xcoord[sommet] - xcoord[0];
+	    lx = Math.abs(lx);
+	    lx = lx / 2;
+	    if (xcoord[sommet]<xcoord[0]){
+       	 lx += xcoord[sommet];
+        }else{
+       	 lx += xcoord[0];
+        }
+	  //  System.out.println("voici lx:"+lx);
+	    return lx;
+	}
+	public int moitierYlast(int sommet){
+		int ly= 0;
+		ly = ycoord[sommet] - ycoord[0];
+		ly = Math.abs(ly);
+	    ly = ly / 2;
+	    if (ycoord[sommet]<ycoord[0]){
+       	 ly += ycoord[sommet];
+        }else{
+       	 ly += ycoord[0];
+        }
+	   // System.out.println("voici ly:"+ly);
+	    return ly;
+	}
+	public static JSONObject get_json(){
+		int i=0;
+		JSONObject obj = new JSONObject();
+		JSONObject obj2 = new JSONObject();
+		JSONArray jsonArray1 = new JSONArray();
+		JSONArray jsonArray2 = new JSONArray();
+		//for (i=0;i<sommet;i++){ pour chaque onglet
+			
+			for (i=0;i<sommet;i++){
+				jsonArray2.add(""+i);
+				jsonArray2.add(""+xcoord[i]);
+				jsonArray2.add(""+ycoord[i]);
+			}
+			obj2.put("Nom_onglet",jsonArray2);
+			//obj.put("Sommet "+i,"Coordonné X :"+xcoord[i] +", Coordonnée Y : "+ycoord[i]);
+		//}
+		return obj2;
 	}
       /*
        * Fonction de calcul d'aire

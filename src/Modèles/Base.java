@@ -21,6 +21,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import org.json.simple.JSONObject;
+
 import Contrôleur.Option;
 import Vue.Finission;
 import Vue.Materiaux;
@@ -107,8 +109,34 @@ public class Base extends JFrame {
 		}
 	}
 
-	public void saveFile() {
-		try {
+	public static void saveFile() {
+		
+		JSONObject obj = new JSONObject();
+		obj=Polygon.get_json();
+		 try {
+			
+			 	 
+			
+			 	            FileWriter jsonFileWriter = new FileWriter("C:\\Users\\kevin\\Desktop\\file1.txt");
+			
+			 	            jsonFileWriter.write(obj.toJSONString());
+			
+			 	            jsonFileWriter.flush();
+			 
+			 	            jsonFileWriter.close();
+			
+			 	 
+			
+			 	            System.out.print(obj);
+			
+			 	 
+			
+			 	        } catch (IOException e) {
+			 
+			 	            e.printStackTrace();
+			
+			 	        }
+		/*try {
 			JFileChooser chooseDirec = new JFileChooser();
 			chooseDirec.setFileSelectionMode(JFileChooser.FILES_ONLY);
 			chooseDirec.showSaveDialog(Main.test);
@@ -122,7 +150,7 @@ public class Base extends JFrame {
 			closeFile();
 		} catch (IOException exception) {
 			System.err.println("Error saving to new file.");
-		}
+		}*/
 	}
 
 	public void closeFile() {
