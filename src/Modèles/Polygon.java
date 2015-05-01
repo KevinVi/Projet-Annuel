@@ -1,6 +1,7 @@
 package Modèles;
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -13,7 +14,14 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.Point2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import org.json.simple.JSONArray;
@@ -35,6 +43,8 @@ public class Polygon extends JPanel implements MouseListener, MouseMotionListene
 	static int[] ycoord;
 	String[] color;
 	private Label label;
+	
+	static int echelle=100;
     int draggedPoint = -1;
       static int sommet =0;
       Point2D[] point;
@@ -43,6 +53,7 @@ public class Polygon extends JPanel implements MouseListener, MouseMotionListene
       Graphics2D g3;
       Image img;
       private Point mouse = new Point();
+     
       java.text.DecimalFormat df = new java.text.DecimalFormat("0.##");
       //getSelectedIndex() recupération de l'onglet en cour
       //Constructeur
@@ -53,6 +64,14 @@ public class Polygon extends JPanel implements MouseListener, MouseMotionListene
          img = Toolkit.getDefaultToolkit().createImage("img/quadri.jpg");
          this.addMouseListener(this);
          this.addMouseMotionListener(this);
+         /*int w =this.getWidth();
+
+ 		int h = this.getHeight();
+
+ 		//BufferedImage bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+      
+ 		paintImage = new BufferedImage(500,500, BufferedImage.TYPE_3BYTE_BGR);
+         */
          
       }
 	
@@ -61,6 +80,7 @@ public class Polygon extends JPanel implements MouseListener, MouseMotionListene
          Graphics2D g2 = (Graphics2D)g;
          //Option;
          g.drawImage(img, 0, 0, null);
+         
          if (xcoord == null) {
             xcoord = new int[] { scaleX(0.1), scaleX(0.3), scaleX(0.4),scaleX(0.75),scaleX(0.9),
                                scaleX(0.75), scaleX(0.6), scaleX(0.3) ,scaleX(0.2),scaleX(0.1)};
@@ -68,6 +88,7 @@ public class Polygon extends JPanel implements MouseListener, MouseMotionListene
                                scaleY(0.7), scaleY(0.9), scaleY(0.7), scaleY(0.6),scaleY(0.55)};
          }
          color = new String[]{"Color.BLUE","Color.RED","Color.YELLOW","Color.BLACK"};
+         //g2.setColor(Color.GREEN);
          g2.fillPolygon(xcoord, ycoord, sommet);
          g2.setColor(Color.BLUE);
          g2.setStroke(new BasicStroke(2));
@@ -158,7 +179,7 @@ public class Polygon extends JPanel implements MouseListener, MouseMotionListene
       public void mouseEntered(MouseEvent e) { }
       public void mouseExited(MouseEvent e) { }
     
-      public double area() {
+      public static double area() {
 			int i, j, n = sommet;
 		double area = 0;
 
@@ -168,14 +189,14 @@ public class Polygon extends JPanel implements MouseListener, MouseMotionListene
 			area -=xcoord[j] * ycoord[i];
 		}
 		area /= 2.0;
-		return (Math.abs(area));
+		return (Math.abs(area)/(echelle*100));
 		}
 	public double longueur(int sommet){
 	    double res,lx,ly = 0.0;
 	    lx = xcoord[sommet] - xcoord[sommet+1];
 	    ly = ycoord[sommet] - ycoord[sommet+1];
 	    res= Math.sqrt((lx*lx)+(ly*ly));
-	    return res;
+	    return res/echelle;
 	
 	}
 	public int moitierX(int sommet){
@@ -209,7 +230,7 @@ public class Polygon extends JPanel implements MouseListener, MouseMotionListene
 	    lx = xcoord[sommet] - xcoord[0];
 	    ly = ycoord[sommet] - ycoord[0];
 	    res= Math.sqrt((lx*lx)+(ly*ly));
-	    return res;
+	    return res/echelle;
 	
 	}
 	public int moitierXlast(int sommet){
@@ -261,6 +282,33 @@ public class Polygon extends JPanel implements MouseListener, MouseMotionListene
 		//}
 		return obj2;
 	}
+	public  JSONObject create_devis(){
+
+		JSONObject obj = new JSONObject();
+		Dimension size = new Dimension(100,100);
+		BufferedImage myImage = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
+		JOptionPane.showMessageDialog(null, new JLabel(new ImageIcon(myImage)));
+	    return obj ;
+	}
+
+	public BufferedImage createImage(JPanel panel) {
+
+		int w = panel.getWidth();
+
+		int h = panel.getHeight();
+
+		BufferedImage bi = new BufferedImage(640,640, BufferedImage.TYPE_INT_RGB);
+
+		Graphics g = bi.getGraphics();
+
+		paintComponent(g);
+
+		return (bi);
+
+	}
+	
+	
+	
       /*
        * Fonction de calcul d'aire
       public static double area(Point2D[] polyPoints) {

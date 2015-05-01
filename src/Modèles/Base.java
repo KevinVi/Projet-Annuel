@@ -66,7 +66,7 @@ public class Base extends JFrame {
 		menugauche = new Option(dessin);
 		materiauxgauche = new Materiaux(menudroit);
 		menudroit = new Resume(poly);
-		bas = new Finission();
+		bas = new Finission(poly);
 		add(dessin, BorderLayout.CENTER);
 		
 		JPanel gauche = new JPanel();
