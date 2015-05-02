@@ -17,6 +17,10 @@ import Modèles.Polygon;
 
 public class Resume extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4074951531246901164L;
 	private static TextArea t;
 	private Polygon dessin;
 	
