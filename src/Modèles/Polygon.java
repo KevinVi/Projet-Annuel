@@ -98,11 +98,11 @@ public class Polygon extends JPanel implements MouseListener,
 
 		}
 		g2.setColor(Color.decode("#2766A1"));
-		g2.drawRect(739, 634, 88, 16);
+		g2.drawRect(724, 634,103, 16);
 		g2.setColor(Color.WHITE);
-		g2.fillRect(740, 635, 87, 15);
+		g2.fillRect(725, 635, 102, 15);
 		g2.setColor(Color.decode("#2766A1"));
-		g2.drawString("Valeur : " + df.format(prix()) + " €", 742, 648);
+		g2.drawString("Valeur : " + df.format(prix()) + " €", 728, 648);
 		repaint();
 	}
 
