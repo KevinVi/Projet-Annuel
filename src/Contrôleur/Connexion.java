@@ -31,7 +31,8 @@ public class Connexion {
 			System.out.println("Pilote mal installé..."+e);
 		}
 		try{
-			con = DriverManager.getConnection("jdbc:mysql://localhost/devisme", "root", "");
+			con = DriverManager.getConnection("jdbc:mysql://netxis.ddns.net/devisme", "root", "123soleil");
+			System.out.println("je suis co");
 		}
 		catch(SQLException e){
 			System.out.println("Erreur SQL :"+e);
