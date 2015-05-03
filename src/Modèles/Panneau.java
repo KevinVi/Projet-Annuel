@@ -23,12 +23,13 @@ public class Panneau extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 6986414199300820696L;
 	@SuppressWarnings("unused")
-	private String nom;
+	private static String nom;
 	private static double prix;
 	private String img;
 	private int j=0;
-	private JRadioButton t,t2,t3,t4,t5,t6,t7,t8,t9,t10,f;
-	private double p,p2,p3,p4,p5,p6,p7,p8,p9;
+	private JRadioButton t,t2,t3,t4,t5,f;
+	private double p,p2,p3,p4,p5;
+	private String s,s2,s3,s4,s5;
 	private ButtonGroup bgroup = new ButtonGroup();
 
 	/**
@@ -68,6 +69,7 @@ public class Panneau extends JPanel implements ActionListener {
 			this.t = new JRadioButton(nom);
 			t.addActionListener(this);
 			p=prix;
+			s=nom;
 			//this.setPrix(prix);
 			j++;
 			return t;
@@ -75,6 +77,7 @@ public class Panneau extends JPanel implements ActionListener {
 			this.t2 = new JRadioButton(nom);
 			t2.addActionListener(this);
 			p2=prix;
+			s2=nom;
 			//this.setPrix(prix);
 			j++;
 			return t2;
@@ -82,6 +85,7 @@ public class Panneau extends JPanel implements ActionListener {
 			this.t3 = new JRadioButton(nom);
 			t3.addActionListener(this);
 			p3=prix;
+			s3=nom;
 			//this.setPrix(prix);
 			j++;
 			return t3;
@@ -89,44 +93,18 @@ public class Panneau extends JPanel implements ActionListener {
 			this.t4 = new JRadioButton(nom);
 			t4.addActionListener(this);
 			p4=prix;
+			s4=nom;
 			//this.setPrix(prix);
 			j++;
 			return t4;
-		case 4:
+		default:
 			this.t5 = new JRadioButton(nom);
 			t5.addActionListener(this);
 			p5=prix;
+			s5=nom;
 			//this.setPrix(prix);
 			j++;
 			return t5;
-		case 5:
-			this.t6 = new JRadioButton(nom);
-			t6.addActionListener(this);
-			p6=prix;
-			//this.setPrix(prix);
-			j++;
-			return t6;
-		case 6:
-			this.t7 = new JRadioButton(nom);
-			t7.addActionListener(this);
-			j++;
-			return t7;
-		case 7:
-			this.t8 = new JRadioButton(nom);
-			t8.addActionListener(this);
-			j++;
-			return t8;
-		case 8:
-			this.t9 = new JRadioButton(nom);
-			t9.addActionListener(this);
-			j++;
-			return t9;
-		
-		default:
-			this.t10 = new JRadioButton(nom);
-			t10.addActionListener(this);
-			j++;
-			return t10;
 		}
 		
 		
@@ -140,6 +118,9 @@ public class Panneau extends JPanel implements ActionListener {
 	 **/
 	public void setNom(String nom) {
 		this.nom = nom;
+	}
+	public static  String getNom(){
+		return nom;
 	}
 
 	public void setPrix(int p) {
