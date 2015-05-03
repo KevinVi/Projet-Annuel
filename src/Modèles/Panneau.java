@@ -2,6 +2,7 @@ package Modèles;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
+
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -20,6 +21,8 @@ public class Panneau extends JPanel {
 	private static final long serialVersionUID = 6986414199300820696L;
 	@SuppressWarnings("unused")
 	private String nom;
+	private int prix;
+	private String img;
 	private ButtonGroup bgroup = new ButtonGroup();
 
 	/**
@@ -45,6 +48,7 @@ public class Panneau extends JPanel {
 		this.bgroup.add(t);
 		this.add(t);
 		JLabel j = new JLabel(new ImageIcon(imgChemin));
+		this.setImg(imgChemin);
 		j.setToolTipText("<html><body><img src='"+img+"' width=500 height=500></body></html>");
 		this.add(j);
 	}
@@ -57,5 +61,22 @@ public class Panneau extends JPanel {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
+
+	public void setPrix(int p) {
+		this.prix = p;
+	}
+
+	public int getPrix() {
+		return prix;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
+	}
+	
 
 }
