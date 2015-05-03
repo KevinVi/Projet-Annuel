@@ -97,8 +97,7 @@ public class JDOM {
 						p.AddBoutonPanneau(nodeMatiere.getFirstChild()
 								.getNodeValue(), nodeIcon.getFirstChild()
 								.getNodeValue(), nodeImg.getFirstChild()
-								.getNodeValue(), nbBoutonsElements);
-						p.setPrix(Integer.parseInt(nodePrix.getFirstChild().getNodeValue()));
+								.getNodeValue(), nbBoutonsElements,Integer.parseInt(nodePrix.getFirstChild().getNodeValue()));
 					}
 				}
 			}

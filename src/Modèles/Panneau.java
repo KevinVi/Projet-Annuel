@@ -27,6 +27,7 @@ public class Panneau extends JPanel implements ActionListener {
 	private String img;
 	private JRadioButton t;
 	private ButtonGroup bgroup = new ButtonGroup();
+	private String tabMatiere[][]= new String[10][10];
 
 	/**
 	 * Constructor of the class Panneau
@@ -45,36 +46,53 @@ public class Panneau extends JPanel implements ActionListener {
 	 * @param i:			total number of radio button for this tab
 	 * 
 	 **/
-	public void AddBoutonPanneau(String title, String imgChemin, String img, int i){
+	public void AddBoutonPanneau(String title, String imgChemin, String img, int i, int prix){
 		this.setLayout(new GridLayout(i, 1));
 		this.t = new JRadioButton(title);
 		this.bgroup.add(t);
 		this.add(t);
-		t.addActionListener(this);
+		this.t.addActionListener(this);
 		JLabel j = new JLabel(new ImageIcon(imgChemin));
 		this.setImg(imgChemin);
+		this.setPrix(prix);
 		j.setToolTipText("<html><body><img src='"+img+"' width=500 height=500></body></html>");
 		this.add(j);
+		
 	}
 	
 	
 	/**
-	 * Setter for the name of the tab
+	 * Setter of the name of the tab
 	 * @param nom :		name of the tab
 	 * 
 	 **/
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-
+	
+	/**
+	 * Setter of the price
+	 * @param p :	the price 
+	 * 
+	 **/
 	public void setPrix(int p) {
 		this.prix = p;
 	}
 
+	/**
+	 * Getter of the price
+	 * @return prix :	the price 
+	 * 
+	 **/
 	public static double getPrix() {
 		return prix;
 	}
 
+	/**
+	 * Getter of the price
+	 * @return img :	the picture path 
+	 * 
+	 **/
 	public String getImg() {
 		return img;
 	}
@@ -85,10 +103,7 @@ public class Panneau extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		if(e.getSource()==t){
 			Polygon.setPrice(getPrix());
-		}
 	}
 	
 
