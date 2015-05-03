@@ -7,7 +7,9 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Label;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.Shape;
 import java.awt.TextArea;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
@@ -76,58 +78,82 @@ public class Polygon extends JPanel implements MouseListener, MouseMotionListene
       }
 	
 	public void paintComponent(Graphics g) {
-         super.paintComponent(g);
-         Graphics2D g2 = (Graphics2D)g;
-         //Option;
-         g.drawImage(img, 0, 0, null);
-         
-         if (xcoord == null) {
-            xcoord = new int[] { scaleX(0.1), scaleX(0.3), scaleX(0.4),scaleX(0.75),scaleX(0.9),
-                               scaleX(0.75), scaleX(0.6), scaleX(0.3) ,scaleX(0.2),scaleX(0.1)};
-            ycoord = new int[] { scaleY(0.5), scaleY(0.4), scaleY(0.2),scaleY(0.3),scaleY(0.6),
-                               scaleY(0.7), scaleY(0.9), scaleY(0.7), scaleY(0.6),scaleY(0.55)};
-         }
-         color = new String[]{"Color.BLUE","Color.RED","Color.YELLOW","Color.BLACK"};
-         //g2.setColor(Color.GREEN);
-         g2.fillPolygon(xcoord, ycoord, sommet);
-         g2.setColor(Color.BLUE);
-         g2.setStroke(new BasicStroke(2));
-         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                   RenderingHints.VALUE_ANTIALIAS_ON);
-         g2.drawPolygon(xcoord, ycoord, sommet);
-         for (int i = 0; i < sommet; i++){
-            g2.fillRect(xcoord[i] - 3, ycoord[i] - 3, 7, 7);
-           
-         }
-         g2.drawString( (mouse.x) + ", " + (mouse.y) , 5, 13);
-         g2.setColor(Color.decode("#2766A1"));
-         g2.drawRect(0, 0, 60, 15);
-         repaint();
-         double area = this.area();
-         t = new TextArea(""+area);
-         Resume.setT(t);
-         //System.out.println(this.area());
-         
-         //affichage des longueur segment
-         
-         
-         g2.setColor(Color.decode("#E90101"));
-         int i=0;
-        // g2.drawString( ""+df.format(longueurlast(2)) ,moitierXlast(2), moitierYlast(2));
-        while(i<sommet-1){
-        	 g2.drawString( ""+df.format(longueur(i)) ,moitierX(i), moitierY(i));
-        	 i++;
-        	 if(i==sommet-1){
-        		 g2.drawString( ""+df.format(longueurlast(i)) ,moitierXlast(i), moitierYlast(i));
-        	 }
-        	 
-        	 
-        }
+		super.paintComponent(g);
+		Graphics2D g2 = (Graphics2D) g;
+		// Option;
+		
+		g.drawImage(img, 0, 0, null);
+
+		if (xcoord == null) {
+			xcoord = new int[] { scaleX(0.1), scaleX(0.3), scaleX(0.4),
+					scaleX(0.75), scaleX(0.9), scaleX(0.75), scaleX(0.6),
+					scaleX(0.3), scaleX(0.2), scaleX(0.1) };
+			ycoord = new int[] { scaleY(0.5), scaleY(0.4), scaleY(0.2),
+					scaleY(0.3), scaleY(0.6), scaleY(0.7), scaleY(0.9),
+					scaleY(0.7), scaleY(0.6), scaleY(0.55) };
+		}
+		color = new String[] { "Color.BLUE", "Color.RED", "Color.YELLOW",
+				"Color.BLACK" };
+		// g2.setColor(Color.GREEN);
+		
+		g2.fillPolygon(xcoord, ycoord, sommet);
+		
+		g2.setColor(Color.BLUE);
+		g2.setStroke(new BasicStroke(2));
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+				RenderingHints.VALUE_ANTIALIAS_ON);
+		g2.drawPolygon(xcoord, ycoord, sommet);
+		for (int i = 0; i < sommet; i++) {
+			g2.fillRect(xcoord[i] - 3, ycoord[i] - 3, 7, 7);
+
+		}
+		g2.drawString((mouse.x) + ", " + (mouse.y), 5, 13);
+		g2.setColor(Color.decode("#2766A1"));
+		g2.drawRect(0, 0, 60, 15);
+		repaint();
+
+		// System.out.println(this.area());
+
+		// affichage des longueur segment
+
+		g2.setColor(Color.decode("#E90101"));
+		int i = 0;
+		// g2.drawString( ""+df.format(longueurlast(2)) ,moitierXlast(2),
+		// moitierYlast(2));
+		while (i < sommet - 1) {
+			g2.drawString("" + df.format(longueur(i)), moitierX(i), moitierY(i));
+			i++;
+			if (i == sommet - 1) {
+				g2.drawString("" + df.format(longueurlast(i)), moitierXlast(i),
+						moitierYlast(i));
+			}
+
+		}
+		g2.setColor(Color.decode("#2766A1"));
+		g2.drawRect(739, 634, 88, 16);
+		g2.setColor(Color.WHITE);
+		g2.fillRect(740, 635, 87, 15);
+		g2.setColor(Color.decode("#2766A1"));
+		g2.drawString("Valeur : "+df.format(prix())+" €" , 742, 648);
         //System.out.println(i);
         //g2.drawString( ""+df.format(longueurlast(i)) ,moitierXlast(i), moitierYlast(i));
         
       }
-	
+	public BufferedImage clip(Shape s, BufferedImage image)
+	{
+	Rectangle r = s.getBounds();
+	int w = r.width;
+	int h = r.height;
+	int type = BufferedImage.TYPE_INT_ARGB_PRE;
+	BufferedImage dst = new BufferedImage(w, h, type);
+	Graphics2D g2 = dst.createGraphics();
+	g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+	g2.translate(-r.x, -r.y);
+	g2.setClip(s);
+	g2.drawImage(image, 0, 0, null);
+	g2.dispose();
+	return dst;
+	}
       private int scaleX(double x) {
          return (int)(x * getWidth());
       }
@@ -159,9 +185,7 @@ public class Polygon extends JPanel implements MouseListener, MouseMotionListene
       // System.out.println(xcoord[draggedPoint]+" et "+ycoord[draggedPoint]);
        System.out.println(draggedPoint);
        System.out.println(this.area());
-       double area = this.area();
-       t = new TextArea(""+area);
-       Resume.setT(t);
+       
        
        
        
@@ -179,7 +203,7 @@ public class Polygon extends JPanel implements MouseListener, MouseMotionListene
       public void mouseEntered(MouseEvent e) { }
       public void mouseExited(MouseEvent e) { }
     
-      public static double area() {
+      public double area() {
 			int i, j, n = sommet;
 		double area = 0;
 
@@ -191,6 +215,14 @@ public class Polygon extends JPanel implements MouseListener, MouseMotionListene
 		area /= 2.0;
 		return (Math.abs(area)/(echelle*100));
 		}
+      public double prix(){
+    	  double price=0;
+    	  double area=area();
+    	  //double prix = Panneau.getPrice();
+    	 // price=area*prix;
+    	  
+    	  return price;
+      }
 	public double longueur(int sommet){
 	    double res,lx,ly = 0.0;
 	    lx = xcoord[sommet] - xcoord[sommet+1];
@@ -278,6 +310,7 @@ public class Polygon extends JPanel implements MouseListener, MouseMotionListene
 				
 			}
 			obj2.put("Nom_onglet",ArrayOnglet);
+			//obj2.put("Nom", this.dess)
 			//obj.put("Sommet "+i,"Coordonné X :"+xcoord[i] +", Coordonnée Y : "+ycoord[i]);
 		//}
 		return obj2;
@@ -297,7 +330,7 @@ public class Polygon extends JPanel implements MouseListener, MouseMotionListene
 
 		int h = panel.getHeight();
 
-		BufferedImage bi = new BufferedImage(640,640, BufferedImage.TYPE_INT_RGB);
+		BufferedImage bi = new BufferedImage(830,653, BufferedImage.TYPE_INT_ARGB);
 
 		Graphics g = bi.getGraphics();
 
@@ -307,7 +340,15 @@ public class Polygon extends JPanel implements MouseListener, MouseMotionListene
 
 	}
 	
-	
+	public Shape getshape(int som, int[]xcoor,int[]ycoor){
+		
+		
+		
+		
+		return null;
+		
+		
+	}
 	
       /*
        * Fonction de calcul d'aire

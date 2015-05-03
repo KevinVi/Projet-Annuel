@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,15 +14,13 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.ButtonGroup;
 import javax.swing.JTextField;
 
+import Vue.Finission;
+
 public class Dialog extends JDialog {
-  private ZDialogInfo zInfo = new ZDialogInfo();
-  private boolean sendData;
-  private JLabel nomLabel, surfaceLabel, mdpLabel, comLabel, loginLabel,login2Label, icon;
-  private JRadioButton tranche1, tranche2, tranche3, tranche4;
+  
+  private JLabel nomLabel, surfaceLabel, mdpLabel, comLabel, loginLabel, icon;
   private JComboBox surface;
   private JTextField nom, login,com, mdp;
 
@@ -36,11 +35,6 @@ public class Dialog extends JDialog {
     
   }
 
-  public ZDialogInfo showZDialog(){
-    this.sendData = false;
-    this.setVisible(true);      
-    return this.zInfo;      
-  }
 
   private void initComponent(){
     //Icône
@@ -118,8 +112,13 @@ public class Dialog extends JDialog {
     JButton okBouton = new JButton("OK");
     
     okBouton.addActionListener(new ActionListener(){
-      public void actionPerformed(ActionEvent arg0) {        
-        zInfo = new ZDialogInfo(nom.getText(), (String)surface.getSelectedItem(), com.getText(), login.getText() ,mdp.getText());
+      public void actionPerformed(ActionEvent arg0) {  
+        System.out.println(nom.getText() + (String)surface.getSelectedItem()+ com.getText()+ login.getText() +mdp.getText());
+        Finission.setNom_projet(nom.getText());
+        Finission.setSurface((String)surface.getSelectedItem());
+        Finission.setCommentaire(com.getText());
+        Finission.setLogin(login.getText());
+        Finission.setMdp(mdp.getText());
         setVisible(false);
       }
 

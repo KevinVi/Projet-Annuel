@@ -7,7 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.Box;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
@@ -26,9 +28,9 @@ import Vue.Menu;
 public class Option extends JPanel implements ActionListener {
 	
 	private static final long serialVersionUID = 1L;
-	private JButton btnDessiner,btnEffacer, btnAjoutOnglet;
+	private JButton btnDessiner,btnRename, btnAjoutOnglet;
 	private String[] point = {"3","4","5","6","7","8","9","10"};
-	private JPanel pan;
+	private JPanel pan,pan2,image;
 	private Box panneauBouton;
 	private Onglet dessin;
 	private Polygon poly;
@@ -46,21 +48,36 @@ public class Option extends JPanel implements ActionListener {
 		
 		btnDessiner = new JButton("Dessiner");
 		btnAjoutOnglet = new JButton("New Onglet");
-		btnEffacer = new JButton("Effacer");
+		btnRename = new JButton("Renomer");
  		pan = new JPanel();
+ 		pan2 = new JPanel();
+ 		image = new JPanel();
  		
-		pan.setLayout(new GridLayout(3,1));
+		pan.setLayout(new GridLayout(1,1));
 		pan.add(btnDessiner);
 		btnDessiner.addActionListener(this);
-		pan.add(btnAjoutOnglet);
-		btnAjoutOnglet.addActionListener(this);
-		pan.add(btnEffacer);
-		btnEffacer.addActionListener(this);
+		
+		pan2.setLayout(new GridLayout(1,1));
+		pan2.add(btnRename);
+		btnRename.addActionListener(this);
+		
+		image.setLayout(new GridLayout(1,1));
+		JLabel img =new JLabel( new ImageIcon( "imDesvis.png"));//path de l'image definir taillé image !!!!!!!!!!!!!!!!!
+		
+		image.add(img);
+		
 		
 		panneauBouton = Box.createVerticalBox();
+		panneauBouton.add(Box.createVerticalStrut(20));
 		panneauBouton.add(pan);
 		panneauBouton.add(Box.createVerticalStrut(20));
 		panneauBouton.add(new JSeparator(JSeparator.HORIZONTAL));
+		panneauBouton.add(Box.createVerticalStrut(20));
+		panneauBouton.add(pan2);
+		panneauBouton.add(Box.createVerticalStrut(20));
+		panneauBouton.add(new JSeparator(JSeparator.HORIZONTAL));
+		panneauBouton.add(Box.createVerticalStrut(20));
+		panneauBouton.add(image);
 		
 		//this = JPanel
 		this.add(panneauBouton,BorderLayout.CENTER );
@@ -71,19 +88,27 @@ public class Option extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()== btnDessiner){
 			   
-			this.dessin.poly.setSommet(Integer.parseInt((String) JOptionPane.showInputDialog(null, "Combien de sommets posséde votre pièce ?", "Créer un polygone", JOptionPane.QUESTION_MESSAGE, null, point,point[0])));    
-			Menu.getSave().setEnabled(true);;
-		}
-		else if(e.getSource()==btnEffacer){	 
 			
+			int sommet = 0;
+			
+			String a = null;
+			a = (String) JOptionPane.showInputDialog(null,
+					"Combien de sommets posséde votre pièce ?",
+					"Créer un polygone", JOptionPane.QUESTION_MESSAGE, null,
+					point, point[0]);
+
+			if (a != null) {
+				sommet = Integer.parseInt(a);
+				this.dessin.poly.setSommet(sommet);
+				Menu.getSave().setEnabled(true);
+			}
 		}
-		else if(e.getSource()==btnAjoutOnglet){	 
-			i = i+1;
-			poly = new Polygon();
-			this.dessin.addTab("Dessin "+i, poly);
-			//this.dessin.getSelectedComponent().equals("Dessin "+i);
-			//this.dessin.poly.setSommet(Integer.parseInt((String) JOptionPane.showInputDialog(null, "Nombre de sommet", "Polygone", JOptionPane.QUESTION_MESSAGE, null, point,point[2])));
+		else if(e.getSource()==btnRename){	 
+			String i = JOptionPane.showInputDialog(null, "Veuillez entrer le nom de l'onglet", "Nom de l'onglet", JOptionPane.QUESTION_MESSAGE);
+			
+			this.dessin.setTitleAt(this.dessin.getSelectedIndex(), i);
 		}
+	
 	}
 	
 }
