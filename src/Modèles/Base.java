@@ -45,13 +45,14 @@ public class Base extends JFrame {
 	
 	public static ObjectOutputStream output;
 	public ObjectInputStream input;
-	public Onglet dessin;
+	public static Onglet dessin;
 	protected Menu menuBar;
 	public Polygon poly;
 	public Option menugauche;
 	public Materiaux materiauxgauche;
 	public Resume menudroit; //setTexte sur ça
 	public Finission bas;
+	public static String name;
 	static int tabX[]=new int[10];
 	static int tabY[] = new int [10];
 
@@ -59,13 +60,14 @@ public class Base extends JFrame {
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		this.setTitle("Devis'Me");
 		setSize(1024, 768);
+		this.setResizable(false);
 		setLayout(new BorderLayout());
 		dessin = new Onglet();
 		poly = new Polygon();
 		menuBar = new Menu();
 		menugauche = new Option(dessin);
 		materiauxgauche = new Materiaux();
-		menudroit = new Resume(poly);
+		//menudroit = new Resume(poly);
 		bas = new Finission(poly);
 		add(dessin, BorderLayout.CENTER);
 		
@@ -86,6 +88,7 @@ public class Base extends JFrame {
 		
 		//this.add(new JLabel(new ImageIcon("img/fond.jpg")));	
 		//this.pack();
+		
 		
 	}
 
@@ -120,8 +123,9 @@ public class Base extends JFrame {
 			JSONParser parser = new JSONParser();
 			JSONObject obj = (JSONObject) parser.parse(reader);
 			JSONArray onglet= (JSONArray) obj.get("Nom_onglet");
+			String nom = (String) obj.get("nom");
 			int x;
-			
+			dessin.setTitleAt(0, nom);
 			for (int i=0;i<onglet.size();i++){
 				//System.out.println("coordonnée"+onglet.get(i));
 				if(i<onglet.size()/2){
@@ -151,9 +155,10 @@ public class Base extends JFrame {
 	}
 
 public static void saveFile() {
-		
+		name=dessin.getTitleAt(0);
 		JSONObject obj = new JSONObject();
 		obj=Polygon.get_json();
+		obj.put("nom", name);
 		 try {
 			
 			JFileChooser chooseDirec = new JFileChooser();
@@ -170,12 +175,14 @@ public static void saveFile() {
 			jsonFileWriter.close();
 
 			System.out.print(obj);
+			Menu.getSave().setEnabled(false);
 
 		} catch (IOException e) {
 
 			e.printStackTrace();
 
 		}
+		
 		/*try {
 			JFileChooser chooseDirec = new JFileChooser();
 			chooseDirec.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -193,14 +200,16 @@ public static void saveFile() {
 		}*/
 	}
 
-	public void closeFile() {
-		try {
-			if (output != null)
-				output.close();
-		} catch (IOException exception) {
-			System.err.println("Error closing file");
-			System.exit(1);
-		}
+	public static void closeFile() {
+		
+			
+				if(Menu.getSave().isEnabled()==true){
+					saveFile();
+				}else{
+					 Main.test.dispose();
+		              System.exit(0); 
+				}
+		
 	}
 	
 }

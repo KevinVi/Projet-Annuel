@@ -4,13 +4,18 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URI;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
+
 import Modèles.Base;
+import Modèles.DialogAide;
 import pluging.MainFrame;
 import main.Main;
 /**
@@ -27,12 +32,10 @@ public class Menu extends JMenuBar{
 	 * 
 	 */
 	JMenu file;
-    JMenuItem fermer;
-    JMenuItem nouveau;
-    JMenuItem ouvrir;
+    JMenuItem fermer,nouveau,ouvrir,plugin,site,aide;
+  
     static JMenuItem save; 
-    JMenuItem plugin;
-    JMenuItem site;
+  
     JMenu view;
     JMenu options; 
     JMenu help;
@@ -49,15 +52,17 @@ public class Menu extends JMenuBar{
         help   = new JMenu("Help");
         info   = new JMenu("?");
 
-        nouveau = new JMenuItem("Nouveau");
-        ouvrir = new JMenuItem("Ouvrir");
-        save = new JMenuItem("Sauvegarde");
+        nouveau = new JMenuItem("New Project");
+        ouvrir = new JMenuItem("Open Project");
+        save = new JMenuItem("Save Project");
         	save.setEnabled(false);
-        fermer = new JMenuItem("Fermer");
+        fermer = new JMenuItem("Close Project");
         
-        plugin = new JMenuItem("Gestion de plugins");
-        site = new JMenuItem("Manuel d'utilisation");
-
+        plugin = new JMenuItem("Plugins management");
+        site = new JMenuItem("User's manual");
+        
+        aide = new JMenuItem("Demo");
+        
         nouveau.addActionListener(itemHandler);
         ouvrir.addActionListener(itemHandler);
         save.addActionListener(itemHandler);
@@ -65,6 +70,21 @@ public class Menu extends JMenuBar{
         
         plugin.addActionListener(itemHandler);
         site.addActionListener(itemHandler);
+        
+        aide.addActionListener(itemHandler);
+        
+        //Raccourci clavier
+        file.setMnemonic('F');
+        view.setMnemonic('V');
+        options.setMnemonic('O');
+        help.setMnemonic('H');
+        info.setMnemonic('I');
+        
+        nouveau.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_MASK));
+        ouvrir.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_MASK));
+        save.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_MASK));
+        fermer.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_MASK));
+        aide.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, KeyEvent.CTRL_MASK));
         
         file.add(nouveau);
         file.add(ouvrir);
@@ -74,12 +94,19 @@ public class Menu extends JMenuBar{
         
         options.add(plugin);
         help.add(site);
-
+        
+        info.add(aide);
+       
+        
         this.add(file);
         this.add(view);
         this.add(options);
         this.add(help);
         this.add(info);
+        
+        
+       
+        
     }
     
     public static JMenuItem getSave() {
@@ -92,8 +119,8 @@ public class Menu extends JMenuBar{
 		public void actionPerformed(ActionEvent event) {
  
             if ( event.getSource() == fermer){
-                Main.test.dispose();
-                System.exit(0); 
+            	
+               Base.closeFile();
             }
             if ( event.getSource() == nouveau ){
             	int result = JOptionPane.showConfirmDialog(null, "Attention, vous allez quitter votre devis en cours", "Message", JOptionPane.OK_CANCEL_OPTION);
@@ -127,6 +154,12 @@ public class Menu extends JMenuBar{
             	Image img = kit.getImage("img/Desvis.png");
         		p.setIconImage(img);
         		setVisible(true);
+            }
+            if(event.getSource() == aide){
+            	System.out.println("coucou");
+            	DialogAide da = new DialogAide(null, "Coucou les ZérOs", true);
+            	da.setVisible(true);
+
             }
     	}
     }

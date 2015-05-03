@@ -11,8 +11,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import Modèles.Dialog;
 import Modèles.Onglet;
 import Modèles.Polygon;
+import Modèles.ZDialogInfo;
 /**
 * Estimate maker java application with GUI.
 * This class covers the lower part of the application.
@@ -42,8 +44,12 @@ public class Finission extends JPanel implements ActionListener{
 		// TODO Auto-generated method stub
 		//dessin.testcreateimage();
 		//dessin.name;
-		dessin.area();
+		Dialog zd = new Dialog(null, "Création Devis", true);
+        ZDialogInfo zInfo = zd.showZDialog(); 
+        JOptionPane jop = new JOptionPane();
+        jop.showMessageDialog(null, zInfo.toString(), "Informations personnage", JOptionPane.INFORMATION_MESSAGE);
+		/*dessin.area();
 		JOptionPane.showMessageDialog(null, new JLabel(new ImageIcon(dessin.createImage(dessin))));
-		System.out.println(dessin.createImage(dessin));
+		System.out.println(dessin.createImage(dessin));*/
 	}
 }
