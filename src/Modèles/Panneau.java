@@ -2,6 +2,8 @@ package Modèles;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -16,13 +18,14 @@ import javax.swing.JRadioButton;
  * @author Mohammad Saman, Vivor Kevin
  * @version 1.0
  */
-public class Panneau extends JPanel {
+public class Panneau extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 6986414199300820696L;
 	@SuppressWarnings("unused")
 	private String nom;
-	private int prix;
+	private static double prix;
 	private String img;
+	private JRadioButton t;
 	private ButtonGroup bgroup = new ButtonGroup();
 
 	/**
@@ -44,14 +47,16 @@ public class Panneau extends JPanel {
 	 **/
 	public void AddBoutonPanneau(String title, String imgChemin, String img, int i){
 		this.setLayout(new GridLayout(i, 1));
-		JRadioButton t = new JRadioButton(title);
+		this.t = new JRadioButton(title);
 		this.bgroup.add(t);
 		this.add(t);
+		t.addActionListener(this);
 		JLabel j = new JLabel(new ImageIcon(imgChemin));
 		this.setImg(imgChemin);
 		j.setToolTipText("<html><body><img src='"+img+"' width=500 height=500></body></html>");
 		this.add(j);
 	}
+	
 	
 	/**
 	 * Setter for the name of the tab
@@ -66,7 +71,7 @@ public class Panneau extends JPanel {
 		this.prix = p;
 	}
 
-	public int getPrix() {
+	public static double getPrix() {
 		return prix;
 	}
 
@@ -76,6 +81,14 @@ public class Panneau extends JPanel {
 
 	public void setImg(String img) {
 		this.img = img;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource()==t){
+			Polygon.setPrice(getPrix());
+		}
 	}
 	
 

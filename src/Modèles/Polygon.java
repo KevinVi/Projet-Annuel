@@ -45,7 +45,9 @@ public class Polygon extends JPanel implements MouseListener, MouseMotionListene
 	static int[] ycoord;
 	String[] color;
 	private Label label;
+	static double price=0;
 	
+
 	static int echelle=100;
     int draggedPoint = -1;
       static int sommet =0;
@@ -216,12 +218,12 @@ public class Polygon extends JPanel implements MouseListener, MouseMotionListene
 		return (Math.abs(area)/(echelle*100));
 		}
       public double prix(){
-    	  double price=0;
     	  double area=area();
-    	  //double prix = Panneau.getPrice();
-    	 // price=area*prix;
-    	  
-    	  return price;
+    	  double result =0;
+    	  //int prix = Panneau.getPrix();
+    	  result=area*price;
+    	  System.out.println(price);
+    	  return result;
       }
 	public double longueur(int sommet){
 	    double res,lx,ly = 0.0;
@@ -340,16 +342,16 @@ public class Polygon extends JPanel implements MouseListener, MouseMotionListene
 
 	}
 	
-	public Shape getshape(int som, int[]xcoor,int[]ycoor){
-		
-		
-		
-		
-		return null;
-		
-		
-	}
+
 	
+
+	public double getPrice() {
+		return price;
+	}
+
+	public static void setPrice(double prix) {
+		price = prix;
+	}
       /*
        * Fonction de calcul d'aire
       public static double area(Point2D[] polyPoints) {
