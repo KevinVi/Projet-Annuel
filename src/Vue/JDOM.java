@@ -27,6 +27,8 @@ public class JDOM {
 	
 	/**
 	 * Default Constructor of the class JDOM
+	 * Read the xml file and send the information to the class Panneau
+	 * To create the materials radio buttons
 	 **/
 	public JDOM() {
 		

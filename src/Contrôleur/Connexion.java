@@ -7,63 +7,64 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *Programme Java de Gestion des notes.
- *Ce programme se connecte à une BDD, effectue les traitements nécessaire en sql.
- *Il a pour objectif de permettre la saisie des notes de n élèves, 
- *afin de pouvoir calculer la moyenne de l'année de ces derniers.
+ * Estimate maker java application with GUI. 
+ * This class manages the connection to the database.
  *
- *Connexion à la base de données gestionnote
- *
- *@author Saman Mohammad
+ * @author Mohammad Saman, Vivor Kevin
+ * @version 1.0
  */
-
 public class Connexion {
 
-	private static Connection con=null;
-	    
-	private static Connection open()
-	{
-		try{
-	        Class.forName("com.mysql.jdbc.Driver");
-	    }
-		catch(ClassNotFoundException e)
-		{
-			System.out.println("Pilote mal installé..."+e);
-		}
-		try{
-			con = DriverManager.getConnection("jdbc:mysql://netxis.ddns.net/Devisme", "app", "123soleil");
-			System.out.println("je suis co");
-		}
-		catch(SQLException e){
-			System.out.println("Erreur SQL :"+e);
-		}
-	        return con;
-	}
-	    
-	public static Connection get()
-	{
+	private static Connection con = null;
+
+	/**
+	 * Methode for create a connection
+	 * @return con :	connection at the database
+	 **/
+	private static Connection open() {
+		
 		try 
 		{
-			if(con==null ||con.isClosed())
-			{
-				con=Connexion.open();
-			}
-		} 
-		catch (SQLException ex) {
-			Logger.getLogger(Connexion.class.getName()).log(Level.SEVERE, null, ex);
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			System.out.println("please install your jdbc pilote : " + e);
 		}
-	        return con;
-	}
-	    
-	public static void close()
-	{
-		try
+		try 
 		{
-			con.close();
+			con = DriverManager.getConnection(
+					"jdbc:mysql://netxis.ddns.net/Devisme", "app", "123soleil");
+		} catch (SQLException e) {
+			System.out.println("Erreur SQL :" + e);
 		}
-		catch(SQLException e){
-			System.out.println("Erreur SQL:"+e);
-	    }
+		return con;
+	}
+
+	/**
+	 * Methode for get the current connection
+	 * @return con :	the current connection at the database
+	 **/
+	public static Connection get() {
+		try {
+			if (con == null || con.isClosed()) {
+				con = Connexion.open();
+			}
+		} catch (SQLException ex) {
+			Logger.getLogger(Connexion.class.getName()).log(Level.SEVERE, null,
+					ex);
+		}
+		return con;
+	}
+
+	/**
+	 * Methode close the current connection
+	 * 
+	 **/
+	public static void close() {
+		try {
+			con.close();
+		} catch (SQLException e) {
+			System.out.println("Erreur SQL:" + e);
+		}
 	}
 
 }

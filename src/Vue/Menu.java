@@ -34,7 +34,7 @@ public class Menu extends JMenuBar implements ActionListener {
 	 */
 	private JMenu file, view, options, help, info;
 	private JMenuItem fermer, nouveau, ouvrir, plugin, site;
-	protected static JMenuItem save;
+	protected static  JMenuItem save;
 	private String[] point = { "3", "4", "5", "6", "7", "8", "9", "10" };
 	private Toolkit kit = Toolkit.getDefaultToolkit();
 	private Onglet dessin;
@@ -98,7 +98,7 @@ public class Menu extends JMenuBar implements ActionListener {
 		this.add(info);
 	}
 
-	public static JMenuItem getSave() {
+	public static  JMenuItem getSave() {
 		return save;
 	}
 

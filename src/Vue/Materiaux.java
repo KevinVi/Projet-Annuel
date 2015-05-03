@@ -17,7 +17,6 @@ public class Materiaux extends JPanel {
 
 	private static final long serialVersionUID = 8351621811785841748L;
 	private static JTabbedPane onglet;
-	public Resume resume;
 
 	/**
 	 * Default Constructor of the class Materiaux
