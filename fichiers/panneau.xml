@@ -11,8 +11,23 @@
 				<imgChemin>img/mat/icon/sol2.jpg</imgChemin>
 				<img>http://www.bauwerk-parkett.com/parquet-images/floor/1200x800/3907/parquet-doussie-megapark-long-plank-1250x100x11mm.jpg</img>
 			</bouton>
+			<bouton>
+				<matiere>Tapis doux</matiere>
+				<imgChemin>img/mat/icon/sol1.jpg</imgChemin>
+				<img>http://cdn4.micasa.ch/medias/sys_master/zoom/c/5/6/7/id_9526227402782_zoom.jpg</img>
+			</bouton>
 	</onglet>
 	<onglet type="mur">
+		<bouton>
+				<matiere>Briques</matiere>
+				<imgChemin>img/mat/icon/mur1.jpg</imgChemin>
+				<img>http://www.scenolia.com/3780/papier-peint-mur-brique.jpg</img>
+		</bouton>
+		<bouton>
+				<matiere>Baroque</matiere>
+				<imgChemin>img/mat/icon/mur2.jpg</imgChemin>
+				<img>http://st.gdefon.com/wallpapers_original/368847_oboi_tekstura_fon_rabochij-stol_6500x4582_www.Gde-Fon.com.jpg</img>
+		</bouton>
 		<bouton>
 				<matiere>Briques</matiere>
 				<imgChemin>img/mat/icon/mur1.jpg</imgChemin>
