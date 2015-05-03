@@ -27,7 +27,7 @@ public class Panneau extends JPanel {
 
 	public Panneau(String nom) {
 		this.setNom(nom);
-		this.setPreferredSize(new Dimension(180, 70));
+		this.setPreferredSize(new Dimension(180, 250));
 	}
 	
 	public void AddBoutonPanneau(String title, String imgChemin, String img, int i){

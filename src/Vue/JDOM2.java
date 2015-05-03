@@ -2,6 +2,8 @@ package Vue;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -16,7 +18,7 @@ import org.xml.sax.SAXException;
 import Modèles.Panneau;
 
 public class JDOM2 {
-	
+	int j =0;
 	public JDOM2() {
 		/*
 		 * Etape 1 : récupération d'une instance de la classe
@@ -55,7 +57,7 @@ public class JDOM2 {
 			 */
 			final NodeList racineNoeuds = racine.getChildNodes();
 			final int nbRacineNoeuds = racineNoeuds.getLength();
-
+			
 			for (int i = 0; i < nbRacineNoeuds; i++) {
 				if (racineNoeuds.item(i).getNodeType() == Node.ELEMENT_NODE) {
 					final Element panneau = (Element) racineNoeuds.item(i);
@@ -73,12 +75,24 @@ public class JDOM2 {
 							.getElementsByTagName("bouton");
 					final int nbBoutonsElements = bouton.getLength();
 					
-					for (int j = 0; j < nbBoutonsElements; j++) {
+					for (int j=0; j < nbBoutonsElements; j++,this.j++) {
 						final Element matiere = (Element) bouton.item(j);
-
+						
+						NodeList nodeListMat = document.getElementsByTagName("matiere");
+						Node nodeMatiere = nodeListMat.item(this.j);
+						System.out.println("matiere"+nodeMatiere.getFirstChild().getNodeValue());
+						
+						NodeList nodeListIcon = document.getElementsByTagName("imgChemin");
+						Node nodeIcon = nodeListIcon.item(this.j);
+						System.out.println("icon"+nodeIcon.getFirstChild().getNodeValue());
+						
+						NodeList nodeListImg = document.getElementsByTagName("img");
+						Node nodeImg = nodeListImg.item(this.j);
+						System.out.println("image>"+nodeImg.getFirstChild().getNodeValue());
+						
 						// Affichage du bouton
-						System.out.println(matiere.getTextContent());
-						p.AddBoutonPanneau("baroque","img/mat/icon/sol1.jpg","http://cdn4.micasa.ch/medias/sys_master/zoom/c/5/6/7/id_9526227402782_zoom.jpg", nbBoutonsElements);
+						//System.out.println(matiere.getTextContent());
+						p.AddBoutonPanneau(nodeMatiere.getFirstChild().getNodeValue(),nodeIcon.getFirstChild().getNodeValue(),nodeImg.getFirstChild().getNodeValue(), nbBoutonsElements);
 						
 						 //Affichage du téléphone
                         //System.out.println(telephone.getAttribute("type") + " : " + telephone.getTextContent());
@@ -86,6 +100,18 @@ public class JDOM2 {
 					}
 				}
 			}
+			
+			//---------
+			/*NodeList nodeList = document.getElementsByTagName("matiere");
+		    for (int i = 0; i < nodeList.getLength(); i++) {
+		        Node node = nodeList.item(i);
+		        if (node.hasChildNodes()) {
+
+		            System.out.println("<tr><td>Mat</td>" + "<td>"+node.getFirstChild().getNodeValue()+"</td></tr>");
+
+		        }
+		    }*/
+		        //---------
 		} catch (final ParserConfigurationException e) {
 			e.printStackTrace();
 		} catch (final SAXException e) {
