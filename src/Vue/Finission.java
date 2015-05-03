@@ -5,16 +5,23 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import com.mysql.jdbc.PreparedStatement;
 
 import Contrôleur.Connexion;
 import Modèles.Dialog;
@@ -33,6 +40,9 @@ public class Finission extends JPanel implements ActionListener{
 	JButton btnCreerDevis;
 	Polygon dessin;
 	Onglet onglet;
+	String id;
+	File outputfile;
+	FileInputStream istreamImage;
 	static String nom_projet,surface,commentaire,login,mdp;
 	
 
@@ -60,17 +70,46 @@ public class Finission extends JPanel implements ActionListener{
 		Dialog zd = new Dialog(null, "Création Devis", true);
 		zd.setVisible(true);
 		System.out.println(getMdp());
-		 Image image = dessin.createImage(dessin);
+		Image image = dessin.createImage(dessin);
+		try {
+		    // retrieve image
+		    BufferedImage bi = dessin.createImage(dessin);
+		     outputfile = new File("saved.png");
+		    ImageIO.write(bi, "png", outputfile);
+		} catch (IOException e) {
+		    
+		}
+		try {
+			istreamImage = new FileInputStream(outputfile);
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		try {
 			Connection con = Connexion.get();
 			Statement mon_statement = con.createStatement();
-			ResultSet mon_resultat = mon_statement.executeQuery("SELECT * FROM Client WHERE loginClient ="+getLogin()+" AND mdpClient = "+getMdp());
-			/*if(mon_resultat!=null){
-				mon_statement.executeUpdate("INSERT INTO Devis (Id, Nom_projet,Nom_dessin, Surface ,Commentaire ,Prix , Image) VALUES(DEFAULT,'"+onglet.getTitleAt(0)+" '"+getNom_projet()+"','"+getSurface()+"','"+getCommentaire()+"','"+dessin.prix()+"','"+image+"')");
+			ResultSet mon_resultat = mon_statement.executeQuery("SELECT idClient FROM Client WHERE loginClient ='"+getLogin()+"' AND mdpClient = '"+getMdp()+"'");
+			while(mon_resultat.next()){
+				id = mon_resultat.getString("idClient");
+				System.out.println("hello je suis là biatch"+id);
+			}
+			
+			if(mon_resultat!=null){
+				String sql="INSERT INTO Devis ( nom_projet,nom_dessin, surface ,commentaire ,prix , image,idClient) VALUES(?, ?,?,?,?,?,'"+id+"')";
+				java.sql.PreparedStatement statement = con.prepareStatement(sql);
+				statement.setString(1,getNom_projet() );
+				statement.setString(2,onglet.getTitleAt(0) );
+				statement.setString(3,getSurface() );
+				statement.setString(4,getCommentaire() );
+				statement.setDouble(5,dessin.prix() );
+				statement.setBinaryStream(6, istreamImage, (int)outputfile.length());
+				statement.executeUpdate();
+				//mon_statement.executeUpdate("INSERT INTO Devis ( nom_projet,nom_dessin, surface ,commentaire ,prix , image,idClient) VALUES('"+onglet.getTitleAt(0)+"', '"+getNom_projet()+"','"+getSurface()+"','"+getCommentaire()+"','"+dessin.prix()+"','"+image+"','"+id+"')");
 			}else{
 				JOptionPane.showMessageDialog(null,"Mauvais Login ou Mot de Passe","Erreur",JOptionPane.ERROR_MESSAGE);
 
-			}*/
+			
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
