@@ -64,7 +64,7 @@ public class Base extends JFrame {
 		setLayout(new BorderLayout());
 		dessin = new Onglet();
 		poly = new Polygon();
-		menuBar = new Menu();
+		menuBar = new Menu(dessin);
 		menugauche = new Option(dessin);
 		materiauxgauche = new Materiaux();
 		//menudroit = new Resume(poly);
