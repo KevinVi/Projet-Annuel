@@ -5,12 +5,15 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URI;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 
 import Modèles.Base;
 import pluging.ChargerPlugin;
@@ -51,15 +54,27 @@ public class Menu extends JMenuBar {
 		help = new JMenu("Help");
 		info = new JMenu("?");
 
-		nouveau = new JMenuItem("Nouveau");
-		ouvrir = new JMenuItem("Ouvrir");
-		save = new JMenuItem("Sauvegarde");
+		nouveau = new JMenuItem("New Project");
+		ouvrir = new JMenuItem("Open Project");
+		save = new JMenuItem("Save Project");
 		save.setEnabled(false);
-		fermer = new JMenuItem("Fermer");
+		fermer = new JMenuItem("Close Project");
 
 		plugin = new JMenuItem("Gestion de plugins");
 		site = new JMenuItem("Manuel d'utilisation");
-
+		
+		//Racourci clavier
+		file.setMnemonic('F');
+		view.setMnemonic('V');
+		options.setMnemonic('O');
+		help.setMnemonic('H');
+		info.setMnemonic('I');
+		
+		nouveau.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_MASK));
+		ouvrir.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_MASK));
+		save.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_MASK));
+		fermer.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, KeyEvent.CTRL_MASK));
+		
 		nouveau.addActionListener(itemHandler);
 		ouvrir.addActionListener(itemHandler);
 		save.addActionListener(itemHandler);
@@ -94,8 +109,7 @@ public class Menu extends JMenuBar {
 		public void actionPerformed(ActionEvent event) {
 
 			if (event.getSource() == fermer) {
-				Main.test.dispose();
-				System.exit(0);
+				Base.closeFile();
 			}
 			if (event.getSource() == nouveau) {
 				int result = JOptionPane.showConfirmDialog(null,
@@ -109,10 +123,10 @@ public class Menu extends JMenuBar {
 				}
 			}
 			if (event.getSource() == save) {
-
+				Base.saveFile();
 			}
 			if (event.getSource() == ouvrir) {
-
+				Base.openFile();
 			}
 			if (event.getSource() == site) {
 				URI uri = URI.create("http://devisme.fr/devis.php");

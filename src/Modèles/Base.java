@@ -152,6 +152,7 @@ public class Base extends JFrame {
 		Polygon.xcoord=tabX;
 		Polygon.ycoord=tabY;
 		Polygon.sommet=j;
+		Menu.getSave().setEnabled(false);
 	}
 
 public static void saveFile() {
