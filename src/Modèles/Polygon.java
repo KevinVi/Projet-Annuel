@@ -103,6 +103,13 @@ public class Polygon extends JPanel implements MouseListener,
 		g2.fillRect(725, 635, 102, 15);
 		g2.setColor(Color.decode("#2766A1"));
 		g2.drawString("Valeur : " + df.format(prix()) + " €", 728, 648);
+		
+		g2.setColor(Color.decode("#2766A1"));
+		g2.drawRect(0, 634,91, 16);
+		g2.setColor(Color.WHITE);
+		g2.fillRect(0, 635, 90, 15);
+		g2.setColor(Color.decode("#2766A1"));
+		g2.drawString("Aire : " + df.format(area()) + " m²", 4,648);
 		repaint();
 	}
 
@@ -175,7 +182,7 @@ public class Polygon extends JPanel implements MouseListener,
 	public double prix() {
 		double area = area();
 		double result = 0;
-		double prix = Panneau.getPrix();
+		//double prix = Panneau.getPrix();
 		result = area * price;
 		
 		//System.out.println(price);
