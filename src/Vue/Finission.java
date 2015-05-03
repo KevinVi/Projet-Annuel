@@ -45,6 +45,8 @@ public class Finission extends JPanel implements ActionListener{
 	File outputfile;
 	FileInputStream istreamImage;
 	static String nom_projet,surface,commentaire,login,mdp;
+	static int cancel;
+	static String nom;
 	
 
 
@@ -70,7 +72,6 @@ public class Finission extends JPanel implements ActionListener{
 		//dessin.name;
 		Dialog zd = new Dialog(null, "Création Devis", true);
 		zd.setVisible(true);
-		System.out.println(getMdp());
 		Image image = dessin.createImage(dessin);
 		image = dessin.createImage(dessin);
 		try {
@@ -87,38 +88,54 @@ public class Finission extends JPanel implements ActionListener{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		if(getNom_projet()==null){
-			JOptionPane.showMessageDialog(null,"Veuillez remplir les champs obligatoire","Erreur",JOptionPane.ERROR_MESSAGE);
-		}else{
-			try {
-				Connection con = Connexion.get();
-				Statement mon_statement = con.createStatement();
-				ResultSet mon_resultat = mon_statement.executeQuery("SELECT idClient FROM Client WHERE loginClient ='"+getLogin()+"' AND mdpClient = '"+getMdp()+"'");
-				while(mon_resultat.next()){
-					id = mon_resultat.getString("idClient");
-					System.out.println("hello je suis là biatch"+id);
-				}
-				//manque le nom du matériaux ;)
-				if(id!=null){
-					String sql="INSERT INTO Devis ( nom_projet,nom_dessin, surface ,commentaire ,prix ,materiel, image,idClient) VALUES(?, ?,?,?,?,?,?,'"+id+"')";
-					java.sql.PreparedStatement statement = con.prepareStatement(sql);
-					statement.setString(1,getNom_projet() );
-					statement.setString(2,onglet.getTitleAt(0) );
-					statement.setString(3,getSurface() );
-					statement.setString(4,getCommentaire() );
-					statement.setDouble(5,dessin.prix() );
-					statement.setString(6, Panneau.getNom());
-					statement.setBinaryStream(6, istreamImage, (int)outputfile.length());
-					statement.executeUpdate();
-					//mon_statement.executeUpdate("INSERT INTO Devis ( nom_projet,nom_dessin, surface ,commentaire ,prix , image,idClient) VALUES('"+onglet.getTitleAt(0)+"', '"+getNom_projet()+"','"+getSurface()+"','"+getCommentaire()+"','"+dessin.prix()+"','"+image+"','"+id+"')");
-				}else{
-					JOptionPane.showMessageDialog(null,"Mauvais Login ou Mot de Passe","Erreur",JOptionPane.ERROR_MESSAGE);
+		if (getCancel() != 1) {
+			getNom_projet();
+			getLogin();
+			getMdp();
+			System.out.println("je suis la"+nom);
+			if (getNom_projet() == null||getLogin() == null || getMdp()==null) {
+				JOptionPane.showMessageDialog(null,
+						"Veuillez remplir les champs obligatoire", "Erreur",
+						JOptionPane.ERROR_MESSAGE);
+			} else {
+				try {
+					Connection con = Connexion.get();
+					Statement mon_statement = con.createStatement();
+					ResultSet mon_resultat = mon_statement
+							.executeQuery("SELECT idClient FROM Client WHERE loginClient ='"
+									+ getLogin()
+									+ "' AND mdpClient = '"
+									+ getMdp() + "'");
+					while (mon_resultat.next()) {
+						id = mon_resultat.getString("idClient");
+						System.out.println("hello je suis là biatch" + id);
+					}
+					// manque le nom du matériaux ;)
+					if (id != null) {
+						String sql = "INSERT INTO Devis ( nom_projet,nom_dessin, surface ,commentaire ,prix ,materiel, image,idClient) VALUES(?, ?,?,?,?,?,?,'"
+								+ id + "')";
+						java.sql.PreparedStatement statement = con
+								.prepareStatement(sql);
+						statement.setString(1, getNom_projet());
+						statement.setString(2, onglet.getTitleAt(0));
+						statement.setString(3, getSurface());
+						statement.setString(4, getCommentaire());
+						statement.setDouble(5, dessin.prix());
+						statement.setString(6, nom);
+						statement.setBinaryStream(7, istreamImage,
+								(int) outputfile.length());
+						statement.executeUpdate();
+						// mon_statement.executeUpdate("INSERT INTO Devis ( nom_projet,nom_dessin, surface ,commentaire ,prix , image,idClient) VALUES('"+onglet.getTitleAt(0)+"', '"+getNom_projet()+"','"+getSurface()+"','"+getCommentaire()+"','"+dessin.prix()+"','"+image+"','"+id+"')");
+					} else {
+						JOptionPane.showMessageDialog(null,
+								"Mauvais Login ou Mot de Passe", "Erreur",
+								JOptionPane.ERROR_MESSAGE);
 
-				
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 		}
 		
@@ -183,4 +200,23 @@ public class Finission extends JPanel implements ActionListener{
 	public static void setMdp(String md) {
 		mdp = md;
 	}
+	public int getCancel(){
+		return cancel;
+	}
+	public static void setcancel(int c){
+		cancel=c;
+	}
+
+
+
+	public String getNom() {
+		return nom;
+	}
+
+
+
+	public static void setNom(String n) {
+			nom = n;
+	}
+	
 }
