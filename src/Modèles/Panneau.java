@@ -28,6 +28,7 @@ public class Panneau extends JPanel implements ActionListener {
 	private String img;
 	private int j=0;
 	private JRadioButton t,t2,t3,t4,t5,t6,t7,t8,t9,t10,f;
+	private double p,p2,p3,p4,p5,p6,p7,p8,p9;
 	private ButtonGroup bgroup = new ButtonGroup();
 
 	/**
@@ -66,36 +67,43 @@ public class Panneau extends JPanel implements ActionListener {
 		case 0:
 			this.t = new JRadioButton(nom);
 			t.addActionListener(this);
-			this.setPrix(prix);
+			p=prix;
+			//this.setPrix(prix);
 			j++;
 			return t;
 		case 1:
 			this.t2 = new JRadioButton(nom);
 			t2.addActionListener(this);
-			this.setPrix(prix);
+			p2=prix;
+			//this.setPrix(prix);
 			j++;
 			return t2;
 		case 2:
 			this.t3 = new JRadioButton(nom);
 			t3.addActionListener(this);
-			this.setPrix(prix);
+			p3=prix;
+			//this.setPrix(prix);
 			j++;
 			return t3;
 		case 3:
 			this.t4 = new JRadioButton(nom);
 			t4.addActionListener(this);
-			this.setPrix(prix);
+			p4=prix;
+			//this.setPrix(prix);
 			j++;
 			return t4;
 		case 4:
 			this.t5 = new JRadioButton(nom);
 			t5.addActionListener(this);
-			this.setPrix(prix);
+			p5=prix;
+			//this.setPrix(prix);
 			j++;
 			return t5;
 		case 5:
 			this.t6 = new JRadioButton(nom);
 			t6.addActionListener(this);
+			p6=prix;
+			//this.setPrix(prix);
 			j++;
 			return t6;
 		case 6:
@@ -152,26 +160,25 @@ public class Panneau extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		if(e.getSource()==t){
-			Polygon.setPrice(getPrix());
-			System.out.println(getPrix());
+			Polygon.setPrice(p);
+			System.out.println(p);
 		}
 		if(e.getSource()==t2){
-			Polygon.setPrice(getPrix());
-			System.out.println(getPrix());
+			Polygon.setPrice(p2);
+			System.out.println(p2);
 		}
 		if (e.getSource() == t3) {
-			Polygon.setPrice(getPrix());
-			System.out.println(getPrix());
+			Polygon.setPrice(p3);
+			System.out.println(p3);
 		}
 		if (e.getSource() == t4) {
-			Polygon.setPrice(getPrix());
-			System.out.println(getPrix());
+			Polygon.setPrice(p4);
+			System.out.println(p4);
 		}
 		if (e.getSource() == t5) {
-			Polygon.setPrice(getPrix());
-			System.out.println(getPrix());
+			Polygon.setPrice(p5);
+			System.out.println(p5);
 		}
 	
 	}
