@@ -32,29 +32,20 @@ public class JDOM {
 	 **/
 	public JDOM() {
 		
-		//Etape 1 : récupération d'une instance de la classe "DocumentBuilderFactory" 
+		//récupération d'une instance de la classe "DocumentBuilderFactory" 
 		final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
 		try {
-			//Etape 2 : création d'un parseur 
+			//création d'un parseur 
 			final DocumentBuilder builder = factory.newDocumentBuilder();
-			//Etape 3 : création d'un Document
+			//création d'un Document
 			final Document document = builder.parse(new File("fichiers/panneau.xml"));
 
-			/* Affiche du prologue
-			System.out.println("*************PROLOGUE************");
-			System.out.println("version : " + document.getXmlVersion());
-			System.out.println("encodage : " + document.getXmlEncoding());*/
-
-			
-			 //Etape 4 : récupération de l'Element racine
+			//récupération de l'Element racine
 			final Element racine = document.getDocumentElement();
 
-			/* Affichage de l'élément racine : panneau
-			System.out.println("\n*************RACINE************");
-			System.out.println(racine.getNodeName());*/
 
-			//Etape 5 : récupération des panneaus comportant les différents boutons radio
+			//récupération des panneaus comportant les différents boutons radio
 			final NodeList racineNoeuds = racine.getChildNodes();
 			final int nbRacineNoeuds = racineNoeuds.getLength();
 
@@ -64,42 +55,30 @@ public class JDOM {
 				{
 					final Element panneau = (Element) racineNoeuds.item(i);
 
-					/* Affichage d'un onglet
-					System.out.println("\n*************ONGLET************");
-					System.out.println("onglet : "+ panneau.getAttribute("type"));
-					System.out.println("mat : "+
-					panneau.getAttribute("bouton"));*/
 					Panneau p = new Panneau(panneau.getAttribute("type"));
 					Materiaux.AddOnglet(panneau.getAttribute("type"), p);
 					
-					//Etape 6 : récupération des boutons radio
+					//récupération des boutons radio
 					final NodeList bouton = panneau.getElementsByTagName("bouton");
 					final int nbBoutonsElements = bouton.getLength();
 
 					for (int j = 0; j < nbBoutonsElements; j++, this.j++) 
 					{
-
 						NodeList nodeListMat = document.getElementsByTagName("matiere");
 						Node nodeMatiere = nodeListMat.item(this.j);
-						//System.out.println("matiere"+ nodeMatiere.getFirstChild().getNodeValue());
 
 						NodeList nodeListIcon = document.getElementsByTagName("imgChemin");
 						Node nodeIcon = nodeListIcon.item(this.j);
-						//System.out.println("icon"+ nodeIcon.getFirstChild().getNodeValue());
 
 						NodeList nodeListImg = document.getElementsByTagName("img");
 						Node nodeImg = nodeListImg.item(this.j);
-						//System.out.println("image"+ nodeImg.getFirstChild().getNodeValue());
 						
 						NodeList nodeListPrix = document.getElementsByTagName("prix");
 						Node nodePrix = nodeListPrix.item(this.j);
-						//System.out.println("prix"+ Integer.parseInt(nodeImg.getFirstChild().getNodeValue()));
 						
 						NodeList nodeListColor = document.getElementsByTagName("color");
 						Node nodeColor = nodeListColor.item(this.j);
-						//System.out.println("color"+ nodeColor.getFirstChild().getNodeValue());
 
-						// System.out.println(matiere.getTextContent());
 						p.AddBoutonPanneau(nodeMatiere.getFirstChild()
 								.getNodeValue(), nodeIcon.getFirstChild()
 								.getNodeValue(), nodeImg.getFirstChild()
