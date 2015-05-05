@@ -1,7 +1,6 @@
 package Contrôleur;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,10 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
-import javax.swing.JTabbedPane;
 
 import Modèles.Onglet;
-import Modèles.Polygon;
 import Vue.Menu;
 /**
 * Estimate maker java application with GUI.
@@ -28,18 +25,15 @@ import Vue.Menu;
 public class Option extends JPanel implements ActionListener {
 	
 	private static final long serialVersionUID = 1L;
-	private JButton btnDessiner,btnRename, btnAjoutOnglet;
+	private JButton btnDessiner,btnRename;
 	private String[] point = {"3","4","5","6","7","8","9","10"};
 	private JPanel pan,pan2,image;
 	private Box panneauBouton;
 	private Onglet dessin;
-	private Polygon poly;
-	private int i=1;
+	
 	/**	
-	* Constructor
-	*@param
-	*@return
-	*
+	* Constructor of the Class with 1 parameters
+	*@param draw :   the target of the button
 	**/
 	
 	public Option(Onglet draw)
@@ -47,7 +41,6 @@ public class Option extends JPanel implements ActionListener {
 		this.dessin=draw;
 		
 		btnDessiner = new JButton("Dessiner");
-		btnAjoutOnglet = new JButton("New Onglet");
 		btnRename = new JButton("Renomer");
  		pan = new JPanel();
  		pan2 = new JPanel();
@@ -84,6 +77,11 @@ public class Option extends JPanel implements ActionListener {
 		this.setBackground(Color.decode("#2766A1"));
 	}
 	
+	/**
+	 * Methode called by the action listener
+	 * @param e : 	the trigger of the event
+	 * 
+	 **/
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()== btnDessiner){

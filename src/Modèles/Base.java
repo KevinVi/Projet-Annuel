@@ -5,7 +5,6 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -17,6 +16,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import main.Main;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -26,7 +27,6 @@ import Contrôleur.Option;
 import Vue.Finission;
 import Vue.Materiaux;
 import Vue.Menu;
-import main.Main;
 
 /**
  * Estimate maker java application with GUI. 
@@ -88,37 +88,8 @@ public class Base extends JFrame {
 		this.setVisible(true);
 	}
 
-	/**
-	 * Methode to ...
-	 * 
-	 * @return fileName :
-	 * 
-	 **/
-	public File getFileName() {
-		// TODO : tu t'en sert de celle là?
-		JFileChooser fileChooser = new JFileChooser();
-		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		fileChooser.setCurrentDirectory(new File(""));
-		File fileName = fileChooser.getSelectedFile();
 
-		return fileName;
-	}
 
-	/**
-	 * Methode to load ...
-	 * 
-	 * @param fileName :
-	 * 
-	 **/
-	public void loadFile(File fileName) {
-		// TODO : tu t'en sert de celle là?
-		try {
-			this.input = new ObjectInputStream(new FileInputStream(fileName));
-		} catch (IOException ioException) {
-			System.err.println("Error loading file: " + fileName);
-			return;
-		}
-	}
 
 	/**
 	 * Methode to open a project file.
@@ -129,40 +100,46 @@ public class Base extends JFrame {
 		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 		fileChooser.setCurrentDirectory(new File(""));
 		fileChooser.showOpenDialog(Main.test);
+		
 		File fileName = fileChooser.getSelectedFile();
 		int j = 0;
+		System.out.println(fileName);
+		if (fileName != null) {
 
-		try {
-			FileReader reader = new FileReader(fileName);
-			JSONParser parser = new JSONParser();
-			JSONObject obj = (JSONObject) parser.parse(reader);
-			JSONArray onglet = (JSONArray) obj.get("Nom_onglet");
-			String nom = (String) obj.get("nom");
-			dessin.setTitleAt(0, nom);
-			for (int i = 0; i < onglet.size(); i++) {
-				// System.out.println("coordonnée"+onglet.get(i));
-				if (i < onglet.size() / 2) {
-					System.out.println("coordonnée x " + i + " : "
-							+ onglet.get(i));
-					tabX[i] = Integer.parseUnsignedInt((String) onglet.get(i));
+			try {
+				FileReader reader = new FileReader(fileName);
+				JSONParser parser = new JSONParser();
+				JSONObject obj = (JSONObject) parser.parse(reader);
+				JSONArray onglet = (JSONArray) obj.get("Nom_onglet");
+				String nom = (String) obj.get("nom");
+				dessin.setTitleAt(0, nom);
+				for (int i = 0; i < onglet.size(); i++) {
+					if (i < onglet.size() / 2) {
+						tabX[i] = Integer.parseUnsignedInt((String) onglet
+								.get(i));
 
-				} else {
-					System.out.println("coordonnée y" + onglet.get(i));
-					tabY[j] = Integer.parseUnsignedInt((String) onglet.get(i));
-					j++;
+					} else {
+						tabY[j] = Integer.parseUnsignedInt((String) onglet
+								.get(i));
+						j++;
+					}
 				}
+
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ParseException e) {
-			e.printStackTrace();
+			Polygon.xcoord = tabX;
+			Polygon.ycoord = tabY;
+			Polygon.sommet = j;
+			Menu.getSave().setEnabled(false);
 		}
-		Polygon.xcoord = tabX;
-		Polygon.ycoord = tabY;
-		Polygon.sommet = j;
-		Menu.getSave().setEnabled(false);
 	}
 
 	/**
@@ -182,6 +159,7 @@ public class Base extends JFrame {
 			chooseDirec.showSaveDialog(Main.test);
 			
 			File file = chooseDirec.getSelectedFile();
+			if(file!=null){
 			FileWriter jsonFileWriter = new FileWriter(file + ".json");
 
 			jsonFileWriter.write(obj.toJSONString());
@@ -189,22 +167,14 @@ public class Base extends JFrame {
 			jsonFileWriter.close();
 
 			Menu.getSave().setEnabled(false);
+			}else{
+				Menu.getSave().setEnabled(true);
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		//TODO : C'est quoi se gros bloque vert ?
 		
-		/*
-		 * try { JFileChooser chooseDirec = new JFileChooser();
-		 * chooseDirec.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		 * chooseDirec.showSaveDialog(Main.test); File file =
-		 * chooseDirec.getSelectedFile(); file = new File(file + ".dmf");
-		 * BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(
-		 * file)); bufferedWriter.close(); openFile(file); //
-		 * writeSketchToFile(file); closeFile(); } catch (IOException exception)
-		 * { System.err.println("Error saving to new file."); }
-		 */
+
 	}
 
 	/**

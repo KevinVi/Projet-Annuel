@@ -17,13 +17,31 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import Vue.Finission;
-
+/**
+ * Estimate maker java application with GUI. 
+ * This class create a JDialog to fill the name project
+ * login , password to connect to the data base
+ *
+ * @author Mohammad Saman, Vivor Kevin
+ * @version 1.0
+ */
 public class Dialog extends JDialog {
   
-  private JLabel nomLabel, surfaceLabel, mdpLabel, comLabel, loginLabel, icon;
-  private JComboBox surface;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+private JLabel nomLabel, surfaceLabel, mdpLabel, comLabel, loginLabel, icon;
+  private JComboBox<String> surface;
   private JTextField nom, login,com, mdp;
 
+  /**
+	 * Default constructor of the classe Dialog
+	 * set set size of the frame
+	 * @param parent 	: 		parent of the frame
+	 * @param title     :       title of the frame
+	 **/
+  
   public Dialog(JFrame parent, String title, boolean modal){
     super(parent, title, modal);
     this.setSize(550, 470);
@@ -34,9 +52,13 @@ public class Dialog extends JDialog {
     this.initComponent();
     
   }
+  /**
+	 * Initialisation of the different part of the frame
+	 * 
+	 **/
 
-
-  private void initComponent(){
+  @SuppressWarnings({ "unchecked", "rawtypes"})
+private void initComponent(){
     //Icône
     icon = new JLabel(new ImageIcon("img/Desvis.png"));//image généré
     JPanel panIcon = new JPanel();
@@ -113,7 +135,6 @@ public class Dialog extends JDialog {
     
     okBouton.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent arg0) {  
-        System.out.println(nom.getText() + (String)surface.getSelectedItem()+ com.getText()+ login.getText() +mdp.getText());
         Finission.setNom_projet(nom.getText());
         Finission.setSurface((String)surface.getSelectedItem());
         Finission.setCommentaire(com.getText());
@@ -129,6 +150,7 @@ public class Dialog extends JDialog {
     cancelBouton.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent arg0) {
         setVisible(false);
+        Finission.setcancel(1);
       }      
     });
 

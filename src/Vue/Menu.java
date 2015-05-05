@@ -15,10 +15,9 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
+import pluging.ChargerPlugin;
 import Modèles.Base;
 import Modèles.Onglet;
-import pluging.ChargerPlugin;
-import main.Main;
 
 /**
  * Estimate maker java application with GUI This class includes the menu bar.
@@ -29,21 +28,21 @@ import main.Main;
 public class Menu extends JMenuBar implements ActionListener {
 
 	private static final long serialVersionUID = -437102206245752298L;
-	/**
-	 * 
-	 */
-	private JMenu file, view, options, help, info;
-	private JMenuItem fermer, nouveau, ouvrir, plugin, site;
+	
+	private JMenu file, options, help, info;
+	private JMenuItem fermer, nouveau, ouvrir, plugin, site,information;
 	protected static  JMenuItem save;
 	private String[] point = { "3", "4", "5", "6", "7", "8", "9", "10" };
 	private Toolkit kit = Toolkit.getDefaultToolkit();
 	private Onglet dessin;
-
+	/**	
+	* Constructor of the Class with 1 parameters
+	*@param draw :   the target of the button
+	**/
 	public Menu(Onglet draw) {
 		dessin = draw;
 
 		file = new JMenu("File");
-		view = new JMenu("View");
 		options = new JMenu("Options");
 		help = new JMenu("Help");
 		info = new JMenu("?");
@@ -56,13 +55,13 @@ public class Menu extends JMenuBar implements ActionListener {
 
 		plugin = new JMenuItem("Gestion de plugins");
 		site = new JMenuItem("Manuel d'utilisation");
+		
+		information = new JMenuItem("Information");
 
 		// Racourci clavier
 		file.setMnemonic('F');
-		view.setMnemonic('V');
 		options.setMnemonic('O');
 		help.setMnemonic('H');
-		info.setMnemonic('I');
 
 		nouveau.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
 				KeyEvent.CTRL_MASK));
@@ -72,6 +71,8 @@ public class Menu extends JMenuBar implements ActionListener {
 				KeyEvent.CTRL_MASK));
 		fermer.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F,
 				KeyEvent.CTRL_MASK));
+		information.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I,
+				KeyEvent.CTRL_MASK));
 
 		nouveau.addActionListener(this);
 		ouvrir.addActionListener(this);
@@ -80,7 +81,7 @@ public class Menu extends JMenuBar implements ActionListener {
 
 		plugin.addActionListener(this);
 		site.addActionListener(this);
-		info.addActionListener(this);
+		information.addActionListener(this);
 
 		file.add(nouveau);
 		file.add(ouvrir);
@@ -90,17 +91,20 @@ public class Menu extends JMenuBar implements ActionListener {
 
 		options.add(plugin);
 		help.add(site);
+		
+		info.add(information);
 
 		this.add(file);
-		this.add(view);
 		this.add(options);
 		this.add(help);
 		this.add(info);
 	}
 
-	public static  JMenuItem getSave() {
-		return save;
-	}
+	/**
+	 * Methode called by the action listener
+	 * @param event : 	the trigger of the event
+	 * 
+	 **/
 
 	public void actionPerformed(ActionEvent event) {
 
@@ -145,11 +149,19 @@ public class Menu extends JMenuBar implements ActionListener {
 			p.setIconImage(img);
 			setVisible(true);
 		}
-		if (event.getSource() == info) {
-			JOptionPane.showMessageDialog(null, "Autor : Saman MOHAMMAD \n"
-					+ "Kevin VIVOR \n" + "Devis'Me@2015", "Infos Devis'Me",
+		if (event.getSource() == information) {
+			JOptionPane.showMessageDialog(null, "Autor : \nSaman MOHAMMAD \n"
+					+ "Kevin VIVOR \n" + "Devis'Me @ 2015", "Infos Devis'Me",
 					JOptionPane.INFORMATION_MESSAGE);
 		}
+	}
+	/**
+	 * Getter for the JMenuItem save
+	 * @return save : 	JMenuItem save
+	 * 
+	 **/
+	public static  JMenuItem getSave() {
+		return save;
 	}
 
 }

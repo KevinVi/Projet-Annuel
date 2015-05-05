@@ -9,7 +9,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.channels.FileChannel;
+import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -17,10 +19,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JTextArea;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.LineBorder;
+
+import main.Main;
 
 /**
  * Estimate maker java application with GUI.
@@ -134,6 +135,7 @@ public class ChargerPlugin extends JFrame implements ActionListener {
 			this.TelechargerTextAreaInfo.setText(getStringTelechargerTextAreaInfo()
 							+ "The download was successful ! \n"
 							+ "You must restart the application to make the change in accounts :) ");
+			restartApplication();
 		} catch (Exception e) {
 			e.printStackTrace(); 
 		} 
@@ -154,6 +156,42 @@ public class ChargerPlugin extends JFrame implements ActionListener {
 			}
 		}
 	}
+	/**
+	 *Methode restart application
+	 * Restart the application to refresh charge the pluggin
+	 * 
+	 **/
+	public void restartApplication()
+	{
+	  final String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
+	  File currentJar;
+	try {
+		currentJar = new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+
+		 /* is it a jar file? */
+		if(!currentJar.getName().endsWith(".jar"))
+		    return;
+
+		  /* Build command: java -jar application.jar */
+		  final ArrayList<String> command = new ArrayList<String>();
+		  command.add(javaBin);
+		  command.add("-jar");
+		  command.add(currentJar.getPath());
+
+		  final ProcessBuilder builder = new ProcessBuilder(command);
+		  try {
+			builder.start();
+			System.exit(0);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	} catch (URISyntaxException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
+
+	}
 
 	/**
 	 * Getter for TelechargerTextAreaInfo
@@ -172,5 +210,6 @@ public class ChargerPlugin extends JFrame implements ActionListener {
 	public void setStringTelechargerTextAreaInfo(String s) {
 		TelechargerTextAreaInfo.setText(s);
 	}
+
 
 }

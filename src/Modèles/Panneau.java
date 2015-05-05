@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import Vue.Finission;
+
 /**
  * Estimate maker java application with GUI. 
  * This class create radio buttons for the materials.
@@ -28,7 +30,6 @@ public class Panneau extends JPanel implements ActionListener {
 	private int j = 0;
 	private JRadioButton t, t2, t3, t4, t5, f;
 	private double p, p2, p3, p4, p5;
-	@SuppressWarnings("unused")
 	private String s, s2, s3, s4, s5;
 	private String c,c2,c3,c4,c5;
 	private ButtonGroup bgroup = new ButtonGroup();
@@ -131,27 +132,27 @@ public class Panneau extends JPanel implements ActionListener {
 		if (e.getSource() == t) {
 			Polygon.setPrice(p);
 			Polygon.setColor(c);
-			System.out.println(p);
+			Finission.setNom(s);
 		}
 		if (e.getSource() == t2) {
 			Polygon.setPrice(p2);
 			Polygon.setColor(c2);
-			System.out.println(p2);
+			Finission.setNom(s2);
 		}
 		if (e.getSource() == t3) {
 			Polygon.setPrice(p3);
 			Polygon.setColor(c3);
-			System.out.println(p3);
+			Finission.setNom(s3);
 		}
 		if (e.getSource() == t4) {
 			Polygon.setPrice(p4);
 			Polygon.setColor(c4);
-			System.out.println(p4);
+			Finission.setNom(s4);
 		}
 		if (e.getSource() == t5) {
 			Polygon.setPrice(p5);
 			Polygon.setColor(c5);
-			System.out.println(p5);
+			Finission.setNom(s5);
 		}
 
 	}
