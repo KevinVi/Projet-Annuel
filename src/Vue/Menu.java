@@ -1,4 +1,4 @@
-package Vue;
+package vue;
 
 import java.awt.Desktop;
 import java.awt.Image;
@@ -15,26 +15,26 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
+import modeles.Base;
+import modeles.Onglet;
 import pluging.ChargerPlugin;
-import Modèles.Base;
-import Modèles.Onglet;
 
 /**
  * Estimate maker java application with GUI This class includes the menu bar.
- *
+ * This class create the top menu.
  * @author Mohammad Saman, Vivor Kevin
  */
 
 public class Menu extends JMenuBar implements ActionListener {
 
 	private static final long serialVersionUID = -437102206245752298L;
-	
 	private JMenu file, options, help, info;
 	private JMenuItem fermer, nouveau, ouvrir, plugin, site,information;
 	protected static  JMenuItem save;
 	private String[] point = { "3", "4", "5", "6", "7", "8", "9", "10" };
 	private Toolkit kit = Toolkit.getDefaultToolkit();
 	private Onglet dessin;
+	
 	/**	
 	* Constructor of the Class with 1 parameters
 	*@param draw :   the target of the button
@@ -105,7 +105,6 @@ public class Menu extends JMenuBar implements ActionListener {
 	 * @param event : 	the trigger of the event
 	 * 
 	 **/
-
 	public void actionPerformed(ActionEvent event) {
 
 		if (event.getSource() == fermer) {
@@ -155,6 +154,7 @@ public class Menu extends JMenuBar implements ActionListener {
 					JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
+	
 	/**
 	 * Getter for the JMenuItem save
 	 * @return save : 	JMenuItem save

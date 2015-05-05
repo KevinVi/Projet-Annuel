@@ -1,10 +1,12 @@
-package Vue;
+package vue;
 
 import java.awt.Dimension;
+
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-import Modèles.Panneau;
+import modeles.Panneau;
+import pluging.JDOM;
 
 /**
  * Estimate maker java application with GUI. 

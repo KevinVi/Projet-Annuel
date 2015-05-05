@@ -4,21 +4,21 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import Modèles.Base;
+import modeles.Base;
 
 /**
-* Estimate maker java application with GUI.
-*
-* @author Mohammad Saman, Vivor Kevin
-*/
+ * Estimate maker java application with GUI.
+ *
+ * @author Mohammad Saman, Vivor Kevin
+ */
 
 public class Main {
-	public static Base test; 
 	
-    public static void main(String[] args) 
-    {
-    	 test = new Base();
-    	 test.setLocationRelativeTo(null); // centrer la fenetre
+	public static Base test;
+
+	public static void main(String[] args) {
+		test = new Base();
+		test.setLocationRelativeTo(null); // centrer la fenetre
 
 		try {
 			// On force à utiliser le « look and feel » du système
@@ -35,5 +35,5 @@ public class Main {
 		} catch (UnsupportedLookAndFeelException e1) {
 			e1.printStackTrace();
 		}
-    }
+	}
 }
