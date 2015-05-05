@@ -94,12 +94,17 @@ public class JDOM {
 						NodeList nodeListPrix = document.getElementsByTagName("prix");
 						Node nodePrix = nodeListPrix.item(this.j);
 						//System.out.println("prix"+ Integer.parseInt(nodeImg.getFirstChild().getNodeValue()));
+						
+						NodeList nodeListColor = document.getElementsByTagName("color");
+						Node nodeColor = nodeListColor.item(this.j);
+						//System.out.println("color"+ nodeColor.getFirstChild().getNodeValue());
 
 						// System.out.println(matiere.getTextContent());
 						p.AddBoutonPanneau(nodeMatiere.getFirstChild()
 								.getNodeValue(), nodeIcon.getFirstChild()
 								.getNodeValue(), nodeImg.getFirstChild()
-								.getNodeValue(), nbBoutonsElements,Integer.parseInt(nodePrix.getFirstChild().getNodeValue()));
+								.getNodeValue(), nbBoutonsElements,Integer.parseInt(nodePrix.getFirstChild()
+								.getNodeValue()), nodeColor.getFirstChild().getNodeValue());
 					}
 				}
 			}

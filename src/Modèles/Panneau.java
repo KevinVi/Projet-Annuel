@@ -30,6 +30,7 @@ public class Panneau extends JPanel implements ActionListener {
 	private double p, p2, p3, p4, p5;
 	@SuppressWarnings("unused")
 	private String s, s2, s3, s4, s5;
+	private String c,c2,c3,c4,c5;
 	private ButtonGroup bgroup = new ButtonGroup();
 
 	/**
@@ -50,10 +51,10 @@ public class Panneau extends JPanel implements ActionListener {
 	 * @param i			: 		total number of radio button for this tab
 	 * 
 	 **/
-	public void AddBoutonPanneau(String title, String imgChemin, String img, int i, int prix) {
+	public void AddBoutonPanneau(String title, String imgChemin, String img, int i, int prix, String color) {
 		
 		this.setLayout(new GridLayout(i, 1));
-		this.f = (JRadioButton) createJ(title, j, prix);
+		this.f = (JRadioButton) createJ(title, j, prix, color);
 		this.bgroup.add(f);
 		this.add(f);
 
@@ -74,13 +75,14 @@ public class Panneau extends JPanel implements ActionListener {
 	 * @return t(i)	: 		the created radio button
 	 * 
 	 **/
-	public AbstractButton createJ(String nom, int i, int prix) {
+	public AbstractButton createJ(String nom, int i, int prix, String color) {
 		switch (i) {
 		case 0:
 			this.t = new JRadioButton(nom);
 			t.addActionListener(this);
 			p = prix;
 			s = nom;
+			c = color;
 			j++;
 			return t;
 		case 1:
@@ -88,6 +90,7 @@ public class Panneau extends JPanel implements ActionListener {
 			t2.addActionListener(this);
 			p2 = prix;
 			s2 = nom;
+			c2 = color;
 			j++;
 			return t2;
 		case 2:
@@ -95,6 +98,7 @@ public class Panneau extends JPanel implements ActionListener {
 			t3.addActionListener(this);
 			p3 = prix;
 			s3 = nom;
+			c3 = color;
 			j++;
 			return t3;
 		case 3:
@@ -102,6 +106,7 @@ public class Panneau extends JPanel implements ActionListener {
 			t4.addActionListener(this);
 			p4 = prix;
 			s4 = nom;
+			c4 = color;
 			j++;
 			return t4;
 		default:
@@ -109,6 +114,7 @@ public class Panneau extends JPanel implements ActionListener {
 			t5.addActionListener(this);
 			p5 = prix;
 			s5 = nom;
+			c5 = color;
 			j++;
 			return t5;
 		}
@@ -124,22 +130,27 @@ public class Panneau extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == t) {
 			Polygon.setPrice(p);
+			Polygon.setColor(c);
 			System.out.println(p);
 		}
 		if (e.getSource() == t2) {
 			Polygon.setPrice(p2);
+			Polygon.setColor(c2);
 			System.out.println(p2);
 		}
 		if (e.getSource() == t3) {
 			Polygon.setPrice(p3);
+			Polygon.setColor(c3);
 			System.out.println(p3);
 		}
 		if (e.getSource() == t4) {
 			Polygon.setPrice(p4);
+			Polygon.setColor(c4);
 			System.out.println(p4);
 		}
 		if (e.getSource() == t5) {
 			Polygon.setPrice(p5);
+			Polygon.setColor(c5);
 			System.out.println(p5);
 		}
 
@@ -199,4 +210,5 @@ public class Panneau extends JPanel implements ActionListener {
 		this.img = img;
 	}
 
+	
 }

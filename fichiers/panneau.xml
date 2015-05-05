@@ -6,24 +6,28 @@
 				<imgChemin>img/mat/icon/sol1.jpg</imgChemin>
 				<img>http://cdn4.micasa.ch/medias/sys_master/zoom/c/5/6/7/id_9526227402782_zoom.jpg</img>
 				<prix>50</prix>
+				<color>#E6C77F</color>
 			</bouton>
 			<bouton>
 				<matiere>Parquet</matiere>
 				<imgChemin>img/mat/icon/sol2.jpg</imgChemin>
 				<img>http://www.bauwerk-parkett.com/parquet-images/floor/1200x800/3907/parquet-doussie-megapark-long-plank-1250x100x11mm.jpg</img>
 				<prix>35</prix>
+				<color>#8B540A</color>
 			</bouton>
 			<bouton>
-				<matiere>Tapis doux</matiere>
-				<imgChemin>img/mat/icon/sol1.jpg</imgChemin>
-				<img>http://cdn4.micasa.ch/medias/sys_master/zoom/c/5/6/7/id_9526227402782_zoom.jpg</img>
-				<prix>46</prix>
+				<matiere>Marin</matiere>
+				<imgChemin>img/mat/icon/sol3.jpg</imgChemin>
+				<img>http://www.mondialmoquette.fr/UImages/Produits/20482.jpg</img>
+				<prix>28</prix>
+				<color>#1B3161</color>
 			</bouton>
 			<bouton>
-				<matiere>Parquet</matiere>
-				<imgChemin>img/mat/icon/sol2.jpg</imgChemin>
-				<img>http://www.bauwerk-parkett.com/parquet-images/floor/1200x800/3907/parquet-doussie-megapark-long-plank-1250x100x11mm.jpg</img>
-				<prix>49</prix>
+				<matiere>Carrelage</matiere>
+				<imgChemin>img/mat/icon/sol4.jpg</imgChemin>
+				<img>http://www.renovationettravaux.fr/wp-content/uploads/2013/10/sol-pvc-immitation-carrelage.jpg</img>
+				<prix>39</prix>
+				<color>#5E5F61</color>
 			</bouton>
 	</onglet>
 	<onglet type="mur">
@@ -32,24 +36,29 @@
 				<imgChemin>img/mat/icon/mur1.jpg</imgChemin>
 				<img>http://www.scenolia.com/3780/papier-peint-mur-brique.jpg</img>
 				<prix>40</prix>
+				<color>#CEA1F2</color>
 		</bouton>
 		<bouton>
 				<matiere>Baroque</matiere>
 				<imgChemin>img/mat/icon/mur2.jpg</imgChemin>
 				<img>http://st.gdefon.com/wallpapers_original/368847_oboi_tekstura_fon_rabochij-stol_6500x4582_www.Gde-Fon.com.jpg</img>
 				<prix>30</prix>
+				<color>#F3DD96</color>
 		</bouton>
 		<bouton>
-				<matiere>Briques</matiere>
-				<imgChemin>img/mat/icon/mur1.jpg</imgChemin>
-				<img>http://www.scenolia.com/3780/papier-peint-mur-brique.jpg</img>
+				<matiere>Mosaique</matiere>
+				<imgChemin>img/mat/icon/mur3.jpg</imgChemin>
+				<img>http://www.carrelage-mosaique.fr/1019-large/carrelage-murale-sol-verre-rouge-mix.jpg</img>
 				<prix>65</prix>
+				<color>#8E1317</color>
+				
 		</bouton>
 		<bouton>
-				<matiere>Baroque</matiere>
-				<imgChemin>img/mat/icon/mur2.jpg</imgChemin>
-				<img>http://st.gdefon.com/wallpapers_original/368847_oboi_tekstura_fon_rabochij-stol_6500x4582_www.Gde-Fon.com.jpg</img>
+				<matiere>Bois</matiere>
+				<imgChemin>img/mat/icon/mur4.jpg</imgChemin>
+				<img>http://www.mur-totm.fr/sites/all/themes/Totm/images/design/totm-mur-image-fond.jpg</img>
 				<prix>24</prix>
+				<color>#5B8E13</color>
 		</bouton>
 	</onglet>
 </panneau>

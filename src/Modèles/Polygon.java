@@ -31,7 +31,7 @@ public class Polygon extends JPanel implements MouseListener,
 
 	protected static int[] xcoord;
 	protected static int[] ycoord;
-	private String[] color;
+	private static String color;
 	protected static double price = 0;
 	protected static int echelle = 100;
 	private int draggedPoint = -1;
@@ -64,8 +64,6 @@ public class Polygon extends JPanel implements MouseListener,
 					scaleY(0.3), scaleY(0.6), scaleY(0.7), scaleY(0.9),
 					scaleY(0.7), scaleY(0.6), scaleY(0.55) };
 		}
-		color = new String[] { "Color.BLUE", "Color.RED", "Color.YELLOW",
-				"Color.BLACK" };
 
 		g2.fillPolygon(xcoord, ycoord, sommet);
 
@@ -297,5 +295,15 @@ public class Polygon extends JPanel implements MouseListener,
 	public static void setPrice(double prix) {
 		price = prix;
 	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public static void setColor(String c) {
+		color = c;
+	}
+	
+	
 
 }
