@@ -3,6 +3,7 @@ package controleur;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -32,46 +33,48 @@ public class Option extends JPanel implements ActionListener {
 	private JPanel pan, pan2, image;
 	private Box panneauBouton;
 	private Onglet dessin;
+	private ImageIcon icon;
+	private JLabel img;
 
 	/**
 	 * Constructor of the Class with 1 parameters
 	 *
-	 * @param draw
-	 *            : the target of the button
+	 * @param draw: the target of the button
 	 **/
 	public Option(Onglet draw) {
 		this.dessin = draw;
 
-		btnDessiner = new JButton("Dessiner");
-		btnRename = new JButton("Renommer");
-		pan = new JPanel();
-		pan2 = new JPanel();
-		image = new JPanel();
+		this.btnDessiner = new JButton("Dessiner");
+		this.btnRename = new JButton("Renommer");
+		this.pan = new JPanel();
+		this.pan2 = new JPanel();
+		this.image = new JPanel();
 
-		pan.setLayout(new GridLayout(1, 1));
-		pan.add(btnDessiner);
-		btnDessiner.addActionListener(this);
+		this.pan.setLayout(new GridLayout(1, 1));
+		this.pan.add(btnDessiner);
+		this.btnDessiner.addActionListener(this);
 
-		pan2.setLayout(new GridLayout(1, 1));
-		pan2.add(btnRename);
-		btnRename.addActionListener(this);
+		this.pan2.setLayout(new GridLayout(1, 1));
+		this.pan2.add(btnRename);
+		this.btnRename.addActionListener(this);
 
-		image.setLayout(new GridLayout(1, 1));
-		JLabel img = new JLabel(new ImageIcon("imDesvis.png"));
+		this.image.setLayout(new GridLayout(1, 1));
+		this.icon = new ImageIcon(new ImageIcon("img/Desvis.png").getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
+		this.img =new JLabel( icon);
 
-		image.add(img);
+		this.image.add(img);
 
-		panneauBouton = Box.createVerticalBox();
-		panneauBouton.add(Box.createVerticalStrut(20));
-		panneauBouton.add(pan);
-		panneauBouton.add(Box.createVerticalStrut(20));
-		panneauBouton.add(new JSeparator(JSeparator.HORIZONTAL));
-		panneauBouton.add(Box.createVerticalStrut(20));
-		panneauBouton.add(pan2);
-		panneauBouton.add(Box.createVerticalStrut(20));
-		panneauBouton.add(new JSeparator(JSeparator.HORIZONTAL));
-		panneauBouton.add(Box.createVerticalStrut(20));
-		panneauBouton.add(image);
+		this.panneauBouton = Box.createVerticalBox();
+		this.panneauBouton.add(Box.createVerticalStrut(20));
+		this.panneauBouton.add(pan);
+		this.panneauBouton.add(Box.createVerticalStrut(20));
+		this.panneauBouton.add(new JSeparator(JSeparator.HORIZONTAL));
+		this.panneauBouton.add(Box.createVerticalStrut(20));
+		this.panneauBouton.add(pan2);
+		this.panneauBouton.add(Box.createVerticalStrut(20));
+		this.panneauBouton.add(new JSeparator(JSeparator.HORIZONTAL));
+		this.panneauBouton.add(Box.createVerticalStrut(20));
+		this.panneauBouton.add(image);
 
 		// this = JPanel
 		this.add(panneauBouton, BorderLayout.CENTER);
