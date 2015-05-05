@@ -43,7 +43,7 @@ public class Option extends JPanel implements ActionListener {
 		this.dessin = draw;
 
 		btnDessiner = new JButton("Dessiner");
-		btnRename = new JButton("Renomer");
+		btnRename = new JButton("Renommer");
 		pan = new JPanel();
 		pan2 = new JPanel();
 		image = new JPanel();
