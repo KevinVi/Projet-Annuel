@@ -3,6 +3,7 @@ package modeles;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -30,6 +31,7 @@ public class Dialog extends JDialog {
   
   private static final long serialVersionUID = 1L;
   private JLabel nomLabel, surfaceLabel, mdpLabel, comLabel, loginLabel, icon;
+  private ImageIcon icon2;
   private JComboBox<String> surface;
   private JTextField nom, login,com, mdp;
 
@@ -58,7 +60,8 @@ public class Dialog extends JDialog {
   @SuppressWarnings({ "unchecked", "rawtypes"})
 private void initComponent(){
     //Icône
-    icon = new JLabel(new ImageIcon("img/Desvis.png"));//image généré
+	icon2 = new ImageIcon(new ImageIcon("img/Desvis.png").getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
+    icon = new JLabel(icon2);//image généré
     JPanel panIcon = new JPanel();
     panIcon.setBackground(Color.white);
     panIcon.setLayout(new BorderLayout());
@@ -130,7 +133,7 @@ private void initComponent(){
 
     JPanel control = new JPanel();
     JButton okBouton = new JButton("OK");
-    
+  
     okBouton.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent arg0) {  
         Devis.setNom_projet(nom.getText());

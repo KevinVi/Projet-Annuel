@@ -41,7 +41,7 @@ public class Devis extends JPanel implements ActionListener {
 	private String id = null;
 	private File outputfile;
 	private FileInputStream istreamImage;
-	private static String nom_projet, surface, commentaire, login, mdp,
+	private static String nom_projet=null, surface, commentaire, login=null, mdp=null,
 			nom = null;
 	private static int cancel;
 
@@ -77,7 +77,6 @@ public class Devis extends JPanel implements ActionListener {
 		@SuppressWarnings("unused")
 		Image image = dessin.createImage(dessin);
 		image = dessin.createImage(dessin);
-		System.out.println(onglet.getTitleAt(0));
 		try {
 			// retrieve image
 			BufferedImage bi = dessin.createImage(dessin);
@@ -95,11 +94,10 @@ public class Devis extends JPanel implements ActionListener {
 			e1.printStackTrace();
 		}
 		if (getCancel() != 1) {
-			getNom_projet();
-			getLogin();
-			getMdp();
-			if (getNom_projet() == null || getLogin() == null
-					|| getMdp() == null) {
+			String m=this.getNom_projet();
+			String l=this.getLogin();
+			String n =this.getMdp();
+			if (n.length() ==0 || l.length() ==0 || m.length() ==0) {
 				JOptionPane.showMessageDialog(null,
 						"Veuillez remplir les champs obligatoire", "Erreur",
 						JOptionPane.ERROR_MESSAGE);
@@ -116,7 +114,7 @@ public class Devis extends JPanel implements ActionListener {
 						while (mon_resultat.next()) {
 							id = mon_resultat.getString("idClient");
 						}
-						if (id != null) {
+						if (id!=null) {
 
 							String sql = "INSERT INTO Devis ( nom_projet,nom_dessin, surface ,commentaire ,prix ,materiel, image,idClient) VALUES(?, ?,?,?,?,?,?,'"
 									+ id + "')";
@@ -131,6 +129,7 @@ public class Devis extends JPanel implements ActionListener {
 							statement.setBinaryStream(7, istreamImage,
 									(int) outputfile.length());
 							statement.executeUpdate();
+							
 						} else {
 							JOptionPane.showMessageDialog(null,
 									"Mauvais Login ou Mot de Passe", "Erreur",
@@ -146,15 +145,19 @@ public class Devis extends JPanel implements ActionListener {
 					e.printStackTrace();
 				}
 			}
-			if (id != null) {
+			if (id!=null) {
+			
 				JOptionPane
 						.showMessageDialog(
 								null,
 								"Votre Devis a bien été enregistré \n"
 										+ "Retrouvez le dès maintenant sur votre espace personnel ;)",
 								"Info", JOptionPane.INFORMATION_MESSAGE);
+				id=null;
 			}
+			
 		}
+		
 	}
 
 	/**
